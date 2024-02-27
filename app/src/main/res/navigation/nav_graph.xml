@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.codingschool.deskbooking.ui.login.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/bookingplanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.codingschool.deskbooking.ui.register.RegisterFragment"
+        android:label="Sign Up" />
+    <fragment
+        android:id="@+id/bookingplanFragment"
+        android:name="com.codingschool.deskbooking.ui.bookingplan.BookingPlanFragment"
+        android:label="Booking Plan" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.codingschool.deskbooking.ui.favorites.FavoritesFragment"
+        android:label="Favoriten"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.codingschool.deskbooking.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/administrationFragment"
+        android:name="com.codingschool.deskbooking.ui.administration.AdminFragment"
+        android:label="Admin"
+        tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/reservationFragment"
+        android:name="com.codingschool.deskbooking.ui.reservation.ReservationFragment"
+        android:label="Reservation"
+        tools:layout="@layout/fragment_reservation" />
+</navigation>
