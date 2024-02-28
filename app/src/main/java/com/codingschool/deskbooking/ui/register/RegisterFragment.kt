@@ -10,12 +10,12 @@ import android.widget.ArrayAdapter
 import com.codingschool.deskbooking.R
 import android.widget.EditText
 import android.widget.Spinner
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.codingschool.deskbooking.data.model.authentication.register.Register
 import com.codingschool.deskbooking.ui.viewmodel.RegisterViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class RegisterFragment : Fragment() {
     private lateinit var etPassword: EditText
     private lateinit var etConfirmPassword: EditText
     private lateinit var spinner: Spinner
-    private val registerViewModel: RegisterViewModel by viewModels()
+    private val registerViewModel: RegisterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
