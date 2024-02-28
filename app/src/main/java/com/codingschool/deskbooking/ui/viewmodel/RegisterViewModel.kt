@@ -3,8 +3,8 @@ package com.codingschool.deskbooking.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.model.authentication.register.Register
-import com.codingschool.deskbooking.model.authentication.register.RegisterResponse
+import com.codingschool.deskbooking.data.model.authentication.register.Register
+import com.codingschool.deskbooking.data.model.authentication.register.RegisterResponse
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 

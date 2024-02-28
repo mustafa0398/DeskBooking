@@ -13,7 +13,7 @@ import android.widget.Spinner
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.codingschool.deskbooking.model.authentication.register.Register
+import com.codingschool.deskbooking.data.model.authentication.register.Register
 import com.codingschool.deskbooking.ui.viewmodel.RegisterViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar

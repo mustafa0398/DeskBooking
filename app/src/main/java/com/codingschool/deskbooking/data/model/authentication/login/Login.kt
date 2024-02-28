@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.model.authentication.login
+package com.codingschool.deskbooking.data.model.authentication.login
 
 data class Login(
     val email: String,

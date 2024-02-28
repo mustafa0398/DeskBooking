@@ -1,9 +1,9 @@
 package com.codingschool.deskbooking.service.authentication
 
-import com.codingschool.deskbooking.model.authentication.login.Login
-import com.codingschool.deskbooking.model.authentication.login.LoginResponse
-import com.codingschool.deskbooking.model.authentication.register.Register
-import com.codingschool.deskbooking.model.authentication.register.RegisterResponse
+import com.codingschool.deskbooking.data.model.authentication.login.Login
+import com.codingschool.deskbooking.data.model.authentication.login.LoginResponse
+import com.codingschool.deskbooking.data.model.authentication.register.Register
+import com.codingschool.deskbooking.data.model.authentication.register.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
