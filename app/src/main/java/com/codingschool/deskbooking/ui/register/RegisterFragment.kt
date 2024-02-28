@@ -11,7 +11,6 @@ import com.codingschool.deskbooking.R
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.codingschool.deskbooking.data.model.authentication.register.Register
 import com.codingschool.deskbooking.ui.viewmodel.RegisterViewModel
@@ -64,7 +63,7 @@ class RegisterFragment : Fragment() {
         }
 
 
-        registerViewModel.response.observe(viewLifecycleOwner, Observer { result ->
+        registerViewModel.response.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = {
                     showSnackbar(view, "Registration successful!")
@@ -73,18 +72,23 @@ class RegisterFragment : Fragment() {
                 onFailure = { e ->
                     when {
                         e.message?.contains("400") == true -> {
-                            showSnackbar(view, "Input data invalid. Please check your details and try again.")
+                            showSnackbar(
+                                view,
+                                "Input data invalid. Please check your details and try again."
+                            )
                         }
+
                         e.message?.contains("409") == true -> {
                             showSnackbar(view, "A user with this email already exists.")
                         }
+
                         else -> {
                             showSnackbar(view, e.message ?: "Unknown error occurred")
                         }
                     }
                 }
             )
-        })
+        }
 
         return view
     }
