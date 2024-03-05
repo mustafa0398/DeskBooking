@@ -12,28 +12,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/ivOfficeMap"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:clickable="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvOfficeName"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:focusable="true" />
 
         <TextView
             android:id="@+id/tvOfficeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Name: "
+            android:text="Office Name"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/ivOfficeMap"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

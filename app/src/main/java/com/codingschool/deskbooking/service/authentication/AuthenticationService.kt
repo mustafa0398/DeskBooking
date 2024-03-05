@@ -33,9 +33,7 @@ interface AuthenticationService {
     @GET("api/offices/{id}")
     suspend fun getOfficeById(@Path("id") id: String): Response<Offices>
     @GET("api/desks")
-    suspend fun getAllDesks(): Response<List<Desk>>
-    @GET("api/desks/{id}")
-    suspend fun getDesksById(@Path("id") id: String): Response<List<Desk>>
+    suspend fun getDesksById(): Response<List<Desk>>
     @GET("api/users/profile")
     suspend fun getUserProfile(): User
     @GET("api/equipments")

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
@@ -26,7 +25,6 @@ class OfficesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_offices, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.officesRecyclerView)
 
-        val navController = findNavController()
         officesAdapter = OfficesAdapter(requireContext(), emptyList())
 
         recyclerView.apply {

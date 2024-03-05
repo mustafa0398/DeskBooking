@@ -18,29 +18,18 @@ class DesksViewModel : ViewModel() {
     val errorMessageLiveData = MutableLiveData<String>()
     private val _bookingResult = MutableLiveData<Result<BookingResponse>>()
 
-    fun getAllDesks() {
+    fun getDesksById(id : String) {
         viewModelScope.launch {
             try {
-                val desks = desksRepository.getAllDesks()
-                desksLiveData.postValue(desks)
+                val desks = desksRepository.getDesksById()
+                desksLiveData.postValue(desks.filter { it.office.id == id })
             } catch (e: Exception) {
                 errorMessageLiveData.postValue(e.message)
             }
         }
     }
 
-    fun getDesksById(id: String) {
-        viewModelScope.launch {
-            try {
-                   desksRepository.getOfficesById(id).also {
-                    val desks = desksRepository.getDesksById(it.id)
-                    desksLiveData.postValue(desks)
-                }
-            } catch (e: Exception) {
-                errorMessageLiveData.postValue(e.message)
-            }
-        }
-    }
+
 
     fun createBooking(deskId: String, startDate: String, endDate: String) {
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)

@@ -23,8 +23,6 @@ class OfficesAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvOfficeName: TextView = itemView.findViewById(R.id.tvOfficeName)
-        val ivOfficeMap: ImageView = itemView.findViewById(R.id.ivOfficeMap)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,13 +33,8 @@ class OfficesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val office = officesList[position]
         holder.tvOfficeName.text = office.name
-        val baseUrl = "https://deskbooking.dev.webundsoehne.com/"
-        val ImageUrl = office.map
-        val fullImageUrl = baseUrl + ImageUrl
 
-        loadAndDisplayImage(fullImageUrl, holder.ivOfficeMap)
-
-        holder.ivOfficeMap.setOnClickListener {
+        holder.tvOfficeName.setOnClickListener {
                 val bundle = bundleOf(
                     "id" to office.id
                 )
@@ -51,14 +44,6 @@ class OfficesAdapter(
 
     override fun getItemCount(): Int {
         return officesList.size
-    }
-
-    private fun loadAndDisplayImage(imageUrl: String, imageView: ImageView) {
-        Glide.with(context)
-            .load(imageUrl)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.baseline_error_outline_24)
-            .into(imageView)
     }
 
     fun updateData(newOffices: List<Offices>) {
