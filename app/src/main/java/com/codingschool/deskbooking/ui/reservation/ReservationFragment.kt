@@ -1,16 +1,43 @@
 package com.codingschool.deskbooking.ui.reservation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
+import com.codingschool.deskbooking.ui.viewmodel.ReservationViewModel
+
 class ReservationFragment : Fragment() {
+
+    private lateinit var reservationViewModel: ReservationViewModel
+    private lateinit var reservationAdapter: ReservationAdapter
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_reservation, container, false)
+        val root = inflater.inflate(R.layout.fragment_reservation, container, false)
+
+        reservationViewModel = ViewModelProvider(this).get(ReservationViewModel::class.java)
+
+        val recyclerView: RecyclerView = root.findViewById(R.id.rvReservation)
+        reservationAdapter = ReservationAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = reservationAdapter
+
+        reservationViewModel.userBookings.observe(viewLifecycleOwner, Observer { bookings ->
+            reservationAdapter.submitList(bookings)
+        })
+
+        val userId = "your_user_id_here"
+        reservationViewModel.getUserBookings(userId)
+
+        return root
     }
 }
