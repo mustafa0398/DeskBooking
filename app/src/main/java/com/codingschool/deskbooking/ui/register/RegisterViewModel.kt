@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.ui.viewmodel
+package com.codingschool.deskbooking.ui.register
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

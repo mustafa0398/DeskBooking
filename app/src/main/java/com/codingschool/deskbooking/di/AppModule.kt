@@ -4,11 +4,11 @@ import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import com.codingschool.deskbooking.service.authentication.AuthenticationService
-import com.codingschool.deskbooking.ui.viewmodel.DesksViewModel
-import com.codingschool.deskbooking.ui.viewmodel.LoginViewModel
-import com.codingschool.deskbooking.ui.viewmodel.OfficesViewModel
-import com.codingschool.deskbooking.ui.viewmodel.RegisterViewModel
-import com.codingschool.deskbooking.ui.viewmodel.ReservationViewModel
+import com.codingschool.deskbooking.ui.bookingplan.desks.DesksViewModel
+import com.codingschool.deskbooking.ui.login.LoginViewModel
+import com.codingschool.deskbooking.ui.bookingplan.offices.OfficesViewModel
+import com.codingschool.deskbooking.ui.register.RegisterViewModel
+import com.codingschool.deskbooking.ui.reservation.ReservationViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.ui.viewmodel
+package com.codingschool.deskbooking.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +16,6 @@ class LoginViewModel(
 ) : ViewModel() {
     val response = MutableLiveData<Result<LoginResponse>>()
     val isLoggedIn = MutableLiveData<Boolean>()
-    val department = MutableLiveData<String>()
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -26,9 +25,6 @@ class LoginViewModel(
                     val loginResponse = result.body()!!
                     response.postValue(Result.success(loginResponse))
                     loginRepository.saveLoginTokens(loginResponse.token, loginResponse.refresh)
-
-                    val userProfile = userRepository.getUserProfile()
-                    department.postValue(userProfile.department)
                 } else {
                     val errorMessage = result.errorBody()?.string() ?: "Unbekannter Fehler"
                     response.postValue(Result.failure(Exception("Login fehlgeschlagen: $errorMessage")))

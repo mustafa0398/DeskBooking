@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.ui.viewmodel
+package com.codingschool.deskbooking.ui.bookingplan.offices
 
 import android.util.Log
 import androidx.lifecycle.LiveData

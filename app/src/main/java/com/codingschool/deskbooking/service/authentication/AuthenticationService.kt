@@ -30,12 +30,16 @@ interface AuthenticationService {
 
     @GET("api/offices")
     suspend fun getAllOffices(): Response<List<Offices>>
+
     @GET("api/offices/{id}")
     suspend fun getOfficeById(@Path("id") id: String): Response<Offices>
+
     @GET("api/desks")
     suspend fun getDesksById(): Response<List<Desk>>
+
     @GET("api/users/profile")
-    suspend fun getUserProfile(): User
+    suspend fun getUserProfile(): Response<User>
+
     @GET("api/equipments")
     suspend fun getAllEquipments(): Response<List<Equipment>>
 
@@ -48,5 +52,6 @@ interface AuthenticationService {
     ): Response<BookingResponse>
 
     @GET("/api/bookings/user/{id}")
-    suspend fun getUserBookings(@Path("id") userId: String): Response<List<BookingResponse>>
+    suspend fun getBookingsFromUser(@Path("id") userId: String): Response<List<BookingResponse>>
+
 }

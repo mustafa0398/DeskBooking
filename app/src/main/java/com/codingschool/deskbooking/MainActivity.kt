@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.codingschool.deskbooking.ui.viewmodel.LoginViewModel
+import com.codingschool.deskbooking.ui.login.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
 

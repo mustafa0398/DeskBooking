@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
-import com.codingschool.deskbooking.ui.viewmodel.DesksViewModel
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
@@ -47,10 +48,9 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
     override fun onBookingClick(createBooking: CreateBooking) {
         val deskId = createBooking.desk
-        val startDate = "2024-03-04T12:00:00Z"
-        val endDate = "2024-03-04T13:00:00Z"
-
-        desksViewModel.createBooking(deskId, startDate, endDate)
+        val startDate = LocalDateTime.now()
+        val endDate = LocalDateTime.now()
+        desksViewModel.createBooking(deskId, startDate.format(DateTimeFormatter.ISO_DATE_TIME), endDate.format(DateTimeFormatter.ISO_DATE_TIME))
     }
 
 }

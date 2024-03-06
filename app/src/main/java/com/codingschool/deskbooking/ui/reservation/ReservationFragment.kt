@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.ui.viewmodel.ReservationViewModel
 
 class ReservationFragment : Fragment() {
 
@@ -35,8 +34,7 @@ class ReservationFragment : Fragment() {
             reservationAdapter.submitList(bookings)
         })
 
-        val userId = "your_user_id_here"
-        reservationViewModel.getUserBookings(userId)
+        reservationViewModel.getBookingsFromUser()
 
         return root
     }

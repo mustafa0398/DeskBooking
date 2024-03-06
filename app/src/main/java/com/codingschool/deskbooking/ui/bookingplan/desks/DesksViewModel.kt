@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.ui.viewmodel
+package com.codingschool.deskbooking.ui.bookingplan.desks
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -28,8 +28,6 @@ class DesksViewModel : ViewModel() {
             }
         }
     }
-
-
 
     fun createBooking(deskId: String, startDate: String, endDate: String) {
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)
