@@ -14,4 +14,9 @@
     <string name="error_invalid_email">Enter a valid email address</string>
     <string name="error_fill_all_fields">Please fill in all fields!</string>
     <string name="login_failure">Invalid email or password</string>
+
+    <string name="columns">Columns: %1$d</string>
+    <string name="rows">Rows: %1$d</string>
+    <string name="id">ID: %s</string>
+    <string name="map">Map: %s</string>
 </resources>
