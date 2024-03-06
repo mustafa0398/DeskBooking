@@ -3,6 +3,7 @@ package com.codingschool.deskbooking.data.repository
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.codingschool.deskbooking.service.api.RetrofitClient
 
 class LoginRepository(context: Context) {
     private val applicationContext = context.applicationContext
