@@ -8,11 +8,12 @@ import com.codingschool.deskbooking.data.model.authentication.login.LoginRespons
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
-
+// ViewModel, das die Login-Logik steuert und mit dem Repository interagiert.
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
-    val response = MutableLiveData<Result<LoginResponse>>()
-    val isLoggedIn = MutableLiveData<Boolean>()
+    val response = MutableLiveData<Result<LoginResponse>>() // Veröffentlicht das Ergebnis des Login-Vorgangs
+    val isLoggedIn = MutableLiveData<Boolean>() // Verfolgt, ob der Benutzer aktuell eingeloggt ist
 
+    // Führt den Login-Vorgang aus und speichert Tokens bei Erfolg.
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
@@ -31,6 +32,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         }
     }
 
+    // Überprüft, ob ein Zugriffstoken vorhanden ist, was bedeutet, dass der Benutzer eingeloggt ist.
     fun checkLoginStatus() {
         viewModelScope.launch {
             val accessToken = loginRepository.getAccessToken()

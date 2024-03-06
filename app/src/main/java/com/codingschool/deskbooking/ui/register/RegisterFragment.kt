@@ -1,5 +1,6 @@
 package com.codingschool.deskbooking.ui.register
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +28,7 @@ class RegisterFragment : Fragment() {
     private lateinit var spinner: Spinner
     private val registerViewModel: RegisterViewModel by viewModel()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +40,7 @@ class RegisterFragment : Fragment() {
         etPassword = view.findViewById(R.id.etRegisterPassword)
         etConfirmPassword = view.findViewById(R.id.etRegisterConfirm)
 
-        view.findViewById<MaterialButton>(R.id.btn_login).setOnClickListener {
+        view.findViewById<MaterialButton>(R.id.btn_register).setOnClickListener {
             attemptRegistration()
         }
 
