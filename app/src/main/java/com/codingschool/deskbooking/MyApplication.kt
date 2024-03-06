@@ -19,7 +19,8 @@ class MyApplication : Application() {
             modules(appModule, registerModule, officesModule, desksModule, reservationModule)
 
         }
-        Glide.with(this).setDefaultRequestOptions(RequestOptions()).applyDefaultRequestOptions(RequestOptions())
+        Glide.with(this).setDefaultRequestOptions(RequestOptions())
+            .applyDefaultRequestOptions(RequestOptions())
     }
 }
 

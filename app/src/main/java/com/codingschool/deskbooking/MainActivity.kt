@@ -23,13 +23,17 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.setupWithNavController(navController)
 
-        setupActionBarWithNavController(navController, AppBarConfiguration(navGraph = navController.graph))
+        setupActionBarWithNavController(
+            navController,
+            AppBarConfiguration(navGraph = navController.graph)
+        )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             bottomNavigationView.visibility = when (destination.id) {

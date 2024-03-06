@@ -35,10 +35,11 @@ class OfficesAdapter(
         holder.tvOfficeName.text = office.name
 
         holder.tvOfficeName.setOnClickListener {
-                val bundle = bundleOf(
-                    "id" to office.id
-                )
-            it.findNavController().navigate(R.id.action_bookingplanFragment_to_desksFragment, bundle)
+            val bundle = bundleOf(
+                "id" to office.id
+            )
+            it.findNavController()
+                .navigate(R.id.action_bookingplanFragment_to_desksFragment, bundle)
         }
     }
 

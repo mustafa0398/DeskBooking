@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
 
-class ReservationAdapter : ListAdapter<BookingResponse, ReservationAdapter.ReservationViewHolder>(BookingDiffCallback()) {
+class ReservationAdapter :
+    ListAdapter<BookingResponse, ReservationAdapter.ReservationViewHolder>(BookingDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservationViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,12 +35,16 @@ class ReservationAdapter : ListAdapter<BookingResponse, ReservationAdapter.Reser
             dateEnd.text = booking.dateEnd
         }
     }
+
     class BookingDiffCallback : DiffUtil.ItemCallback<BookingResponse>() {
         override fun areItemsTheSame(oldItem: BookingResponse, newItem: BookingResponse): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BookingResponse, newItem: BookingResponse): Boolean {
+        override fun areContentsTheSame(
+            oldItem: BookingResponse,
+            newItem: BookingResponse
+        ): Boolean {
             return oldItem == newItem
         }
     }

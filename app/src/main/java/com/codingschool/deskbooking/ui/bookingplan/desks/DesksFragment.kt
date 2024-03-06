@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
+import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -20,7 +21,7 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
     private lateinit var desksViewModel: DesksViewModel
     private lateinit var desksAdapter: DesksAdapter
-    private lateinit var id : String
+    private lateinit var id: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +32,7 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
         desksViewModel = ViewModelProvider(this).get(DesksViewModel::class.java)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.rvDesks)
+
         desksAdapter = DesksAdapter(this)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = desksAdapter
@@ -42,7 +44,14 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
                 desksAdapter.submitList(it)
             }
         })
+
+        desksViewModel.equipmentLiveData.observe(viewLifecycleOwner, Observer { equipment ->
+            equipment?.let {
+                desksAdapter.updateEquipment(it)
+            }
+        })
         desksViewModel.getDesksById(id)
+        desksViewModel.getEquipments()
         return root
     }
 
@@ -50,7 +59,11 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
         val deskId = createBooking.desk
         val startDate = LocalDateTime.now()
         val endDate = LocalDateTime.now()
-        desksViewModel.createBooking(deskId, startDate.format(DateTimeFormatter.ISO_DATE_TIME), endDate.format(DateTimeFormatter.ISO_DATE_TIME))
+        desksViewModel.createBooking(
+            deskId,
+            startDate.format(DateTimeFormatter.ISO_DATE_TIME),
+            endDate.format(DateTimeFormatter.ISO_DATE_TIME)
+        )
     }
 
 }

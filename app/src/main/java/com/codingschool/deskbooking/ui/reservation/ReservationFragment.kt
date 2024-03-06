@@ -17,9 +17,7 @@ class ReservationFragment : Fragment() {
     private lateinit var reservationAdapter: ReservationAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_reservation, container, false)
 

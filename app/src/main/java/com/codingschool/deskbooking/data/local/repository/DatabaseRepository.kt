@@ -18,6 +18,7 @@ object DatabaseRepository {
             .fallbackToDestructiveMigration()
             .build()
     }
+
     val deskDao: DeskDao get() = database.deskDao()
 
 }
