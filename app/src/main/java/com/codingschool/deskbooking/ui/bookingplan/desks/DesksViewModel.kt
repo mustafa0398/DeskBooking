@@ -1,24 +1,33 @@
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
 import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
 import com.codingschool.deskbooking.data.repository.DesksRepository
+import com.codingschool.deskbooking.data.repository.EquipmentRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
 class DesksViewModel : ViewModel() {
 
+    private val equipmentRepository = EquipmentRepository()
     private val desksRepository = DesksRepository()
+
     val desksLiveData = MutableLiveData<List<Desk>>()
+    val equipmentLiveData = MutableLiveData<List<Equipment>>()
     val errorMessageLiveData = MutableLiveData<String>()
     private val _bookingResult = MutableLiveData<Result<BookingResponse>>()
 
-    fun getDesksById(id : String) {
+    private val _equipments = MutableLiveData<List<Equipment>>()
+    val equipments: LiveData<List<Equipment>> = _equipments
+
+    fun getDesksById(id: String) {
         viewModelScope.launch {
             try {
                 val desks = desksRepository.getDesksById()
@@ -45,4 +54,18 @@ class DesksViewModel : ViewModel() {
         }
     }
 
+    fun getEquipments() {
+        viewModelScope.launch {
+            try {
+                val response = equipmentRepository.getAllEquipments()
+                if (response.isSuccessful) {
+                    _equipments.postValue(response.body())
+                } else {
+                    // Handle error response
+                }
+            } catch (e: Exception) {
+                // Handle exception
+            }
+        }
+    }
 }

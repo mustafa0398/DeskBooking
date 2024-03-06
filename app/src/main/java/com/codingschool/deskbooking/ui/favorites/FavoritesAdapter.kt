@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 
-class FavoritesAdapter(private val deskList: List<String>) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
+class FavoritesAdapter(private val deskList: List<String>) :
+    RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvDesk: TextView = itemView.findViewById(R.id.tvDesk)
@@ -17,7 +18,8 @@ class FavoritesAdapter(private val deskList: List<String>) : RecyclerView.Adapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favorites, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_favorites, parent, false)
         return ViewHolder(view)
     }
 

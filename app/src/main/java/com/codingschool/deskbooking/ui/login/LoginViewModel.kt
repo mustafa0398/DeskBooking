@@ -10,10 +10,7 @@ import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
-class LoginViewModel(
-    private val loginRepository: LoginRepository,
-    private val userRepository: UserRepository
-) : ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     val response = MutableLiveData<Result<LoginResponse>>()
     val isLoggedIn = MutableLiveData<Boolean>()
 

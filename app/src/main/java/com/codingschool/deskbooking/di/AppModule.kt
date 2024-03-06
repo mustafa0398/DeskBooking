@@ -17,7 +17,7 @@ val appModule = module {
     single<AuthenticationService> { RetrofitClient.authenticationService }
     single { LoginRepository(get()) }
     single { UserRepository(get()) }
-    viewModel { LoginViewModel(get(), get()) }
+    viewModel { LoginViewModel(get()) }
 }
 
 val registerModule = module {

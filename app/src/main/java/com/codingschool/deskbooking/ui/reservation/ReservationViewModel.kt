@@ -17,27 +17,30 @@ class ReservationViewModel : ViewModel() {
     private val reservationRepository = ReservationRepository()
     private val _userBookings = MutableLiveData<List<BookingResponse>>()
     val userBookings: LiveData<List<BookingResponse>> = _userBookings
-    private val userRepository : UserRepository by inject(UserRepository::class.java)
+    private val userRepository: UserRepository by inject(UserRepository::class.java)
     fun getBookingsFromUser() {
         viewModelScope.launch {
-           userRepository.userIdFlow.collect{userId->
-               userId?.let{
-                   try {
-                       val response = reservationRepository.getBookingsFromUser(it)
-                       if (response.isSuccessful) {
-                           _userBookings.postValue(response.body())
-                       } else {
-                           Log.e("ReservationViewModel", "Failed to fetch user bookings: ${response.code()}")
-                       }
-                   } catch (e: Exception) {
-                       Log.e("ReservationViewModel", "Failed to fetch user bookings: ${e.message}")
-                   }
-               }
-           }
+            userRepository.userIdFlow.collect { userId ->
+                userId?.let {
+                    try {
+                        val response = reservationRepository.getBookingsFromUser(it)
+                        if (response.isSuccessful) {
+                            _userBookings.postValue(response.body())
+                        } else {
+                            Log.e(
+                                "ReservationViewModel",
+                                "Failed to fetch user bookings: ${response.code()}"
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e("ReservationViewModel", "Failed to fetch user bookings: ${e.message}")
+                    }
+                }
+            }
         }
     }
 
-    init{
-        viewModelScope.launch {if (userRepository.userIdFlow.value.isNullOrBlank()) userRepository.getUserProfile() }
+    init {
+        viewModelScope.launch { if (userRepository.userIdFlow.value.isNullOrBlank()) userRepository.getUserProfile() }
     }
 }

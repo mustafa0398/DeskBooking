@@ -14,7 +14,7 @@ class DesksRepository {
         }
     }
 
-    suspend fun getOfficesById(id : String): Offices {
+    suspend fun getOfficesById(id: String): Offices {
         val response = RetrofitClient.authenticationService.getOfficeById(id)
         return response.body()!!
     }

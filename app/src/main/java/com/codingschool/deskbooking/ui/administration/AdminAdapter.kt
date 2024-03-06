@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 
-class AdminAdapter(private val adminData: List<String>) : RecyclerView.Adapter<AdminAdapter.ViewHolder>() {
+class AdminAdapter(private val adminData: List<String>) :
+    RecyclerView.Adapter<AdminAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvUser: TextView = itemView.findViewById(R.id.tvUser)
@@ -26,8 +27,7 @@ class AdminAdapter(private val adminData: List<String>) : RecyclerView.Adapter<A
         holder.tvUser.text = adminData
         holder.tvComment.text = "Comment of $adminData:"
 
-        holder.btnAccept.setOnClickListener {
-        }
+        holder.btnAccept.setOnClickListener {}
     }
 
     override fun getItemCount(): Int {
