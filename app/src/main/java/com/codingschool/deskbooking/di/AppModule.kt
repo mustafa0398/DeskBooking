@@ -1,5 +1,7 @@
 package com.codingschool.deskbooking.di
 
+import androidx.room.RoomDatabase
+import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
@@ -29,7 +31,8 @@ val officesModule = module {
 }
 
 val desksModule = module {
-    viewModel { DesksViewModel() }
+    viewModel { DesksViewModel(desksRepository = get()) }
+
 }
 
 val reservationModule = module {

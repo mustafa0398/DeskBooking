@@ -3,6 +3,7 @@ package com.codingschool.deskbooking
 import android.app.Application
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.codingschool.deskbooking.data.module.dataModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import com.codingschool.deskbooking.di.appModule
@@ -16,11 +17,9 @@ class MyApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@MyApplication)
-            modules(appModule, registerModule, officesModule, desksModule, reservationModule)
 
+            modules(dataModule, appModule, registerModule, officesModule, desksModule, reservationModule)
         }
-        Glide.with(this).setDefaultRequestOptions(RequestOptions())
-            .applyDefaultRequestOptions(RequestOptions())
     }
 }
 

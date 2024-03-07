@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
+import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentRequest
+import com.codingschool.deskbooking.data.repository.CommentRepository
 import com.codingschool.deskbooking.data.repository.ReservationRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
@@ -14,6 +16,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 class ReservationViewModel : ViewModel() {
 
+    private val commentRepository = CommentRepository()
     private val reservationRepository = ReservationRepository()
     private val _userBookings = MutableLiveData<List<BookingResponse>>()
     val userBookings: LiveData<List<BookingResponse>> = _userBookings
@@ -36,6 +39,22 @@ class ReservationViewModel : ViewModel() {
                         Log.e("ReservationViewModel", "Failed to fetch user bookings: ${e.message}")
                     }
                 }
+            }
+        }
+    }
+
+    fun createComment(comment: String, deskId: String) {
+        viewModelScope.launch {
+            try {
+                val createCommentRequest = CreateCommentRequest(comment, deskId)
+                val response = commentRepository.createComment(createCommentRequest)
+                if (response.isSuccessful) {
+                    // Handle successful response if needed
+                } else {
+                    // Handle unsuccessful response if needed
+                }
+            } catch (e: Exception) {
+                // Handle exception
             }
         }
     }

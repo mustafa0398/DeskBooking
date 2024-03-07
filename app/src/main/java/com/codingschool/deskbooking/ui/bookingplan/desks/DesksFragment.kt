@@ -13,23 +13,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
+import org.koin.android.ext.android.inject
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
-    private lateinit var desksViewModel: DesksViewModel
+    private val desksViewModel: DesksViewModel by inject()
     private lateinit var desksAdapter: DesksAdapter
     private lateinit var id: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        desksViewModel.loadAllDesk()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_desks, container, false)
-
-        desksViewModel = ViewModelProvider(this).get(DesksViewModel::class.java)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.rvDesks)
 
@@ -50,7 +55,7 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
                 desksAdapter.updateEquipment(it)
             }
         })
-        desksViewModel.getDesksById(id)
+        desksViewModel.getDesksByOfficeId(id)
         desksViewModel.getEquipments()
         return root
     }
