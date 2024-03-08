@@ -1,12 +1,13 @@
 package com.codingschool.deskbooking.ui.administration
 
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRequestUpdate
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
+import com.codingschool.deskbooking.data.model.dto.profile.ProfileResponse
 import com.codingschool.deskbooking.data.repository.AdminCommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
     val comments = MutableLiveData<Result<List<CommentResponse>>>()
     val fixDeskRequests = MutableLiveData<Result<List<FixDeskResponse>>>()
     val updateResult = MutableLiveData<Result<String>>()
-    val isLoading = MutableLiveData<Boolean>()
+    private val isLoading = MutableLiveData<Boolean>()
+
 
     fun loadComments(page: Int) {
         isLoading.value = true
@@ -54,13 +56,12 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
                 val result = fixDeskRequestRepository.updateFixDeskRequest(update)
                 result.fold(
                     onSuccess = {
-                        // Aktualisieren Sie die Liste der FixDeskRequests mit dem neuen Status
+
                         val updatedList = fixDeskRequests.value?.getOrThrow()?.map {
-                            if (it.id == id) it.copy(status = status) else it // Ändern Sie dies entsprechend Ihrer Datenstruktur
+                            if (it.id == id) it.copy(status = status) else it
                         }
                         fixDeskRequests.value = Result.success(updatedList ?: listOf())
 
-                        // Aktualisieren Sie die UI mit der Erfolgsmeldung
                         val message = if (status == "approved") {
                             "Anfrage erfolgreich bestätigt."
                         } else {
@@ -80,4 +81,5 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
             }
         }
     }
+
 }

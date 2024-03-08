@@ -5,6 +5,7 @@ import com.codingschool.deskbooking.data.repository.CommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import com.codingschool.deskbooking.data.repository.FavouriteRepository
 import com.codingschool.deskbooking.data.repository.LoginRepository
+import com.codingschool.deskbooking.data.repository.OfficesRepository
 import com.codingschool.deskbooking.data.repository.ProfileRepository
 import com.codingschool.deskbooking.data.repository.ReservationRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
@@ -35,7 +36,8 @@ val registerModule = module {
 }
 
 val officesModule = module {
-    viewModel { OfficesViewModel() }
+    single { OfficesRepository() }
+    viewModel { OfficesViewModel(get()) }
 }
 
 val desksModule = module {

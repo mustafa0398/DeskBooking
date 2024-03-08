@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_bookingplanFragment_to_desksFragment"
             app:destination="@id/desksFragment" />
+        <action
+            android:id="@+id/action_bookingplanFragment_to_adminFragment"
+            app:destination="@id/administrationFragment"/>
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"

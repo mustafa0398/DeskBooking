@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
+import com.codingschool.deskbooking.ui.profile.ProfileViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.inject
 
 class OfficesFragment : Fragment() {
@@ -31,7 +35,6 @@ class OfficesFragment : Fragment() {
             adapter = officesAdapter
         }
 
-
         officesViewModel.office.observe(viewLifecycleOwner) { offices ->
             Log.d("LiveData", "New offices received: ${offices.size}")
             officesAdapter.updateData(offices)
@@ -41,4 +44,35 @@ class OfficesFragment : Fragment() {
 
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        officesViewModel.fetchUserProfile()
+        officesViewModel.isAdmin.observe(viewLifecycleOwner) { isAdmin ->
+            val bottomNavView: BottomNavigationView = requireActivity().findViewById(R.id.bottomNav)
+            val adminItem = bottomNavView.menu.findItem(R.id.administrationFragment)
+
+            adminItem.isVisible = isAdmin == true
+
+            bottomNavView.setOnNavigationItemSelectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.administrationFragment -> {
+                        if (isAdmin == true) {
+                            findNavController().navigate(menuItem.itemId)
+                            true
+                        } else {
+                            Snackbar.make(view, "Sie haben keine Zugriffsrechte für diese Seite.", Snackbar.LENGTH_LONG).show()
+                            false
+                        }
+                    }
+                    else -> {
+                        findNavController().navigate(menuItem.itemId)
+                        true
+                    }
+                }
+            }
+        }
+    }
+
+
 }

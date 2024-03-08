@@ -100,14 +100,6 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
         }
     }
 
-    fun updateItem(updatedFixDeskRequest: FixDeskResponse) {
-        val index = items.indexOfFirst { it is FixDeskResponse && it.id == updatedFixDeskRequest.id }
-        if (index >= 0) {
-            items[index] = updatedFixDeskRequest
-            notifyItemChanged(index)
-        }
-    }
-
     fun updateItems(newItems: MutableList<Any>) {
         items.clear()
         items.addAll(newItems)
