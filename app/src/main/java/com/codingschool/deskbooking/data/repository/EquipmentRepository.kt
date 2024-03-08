@@ -4,7 +4,7 @@ import com.codingschool.deskbooking.data.model.authentication.equipment.Equipmen
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import retrofit2.Response
 
-class EquipmentRepository() {
+class EquipmentRepository {
     suspend fun getAllEquipments(): Response<List<Equipment>> {
         return RetrofitClient.authenticationService.getAllEquipments()
     }

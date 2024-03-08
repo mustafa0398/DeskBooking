@@ -5,19 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.codingschool.deskbooking.data.model.authentication.offices.Offices
+import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.R
 
 class OfficesAdapter(
     private val context: Context,
-    private var officesList: List<Offices>
+    private var officeList: List<Office>
 ) :
     RecyclerView.Adapter<OfficesAdapter.ViewHolder>() {
 
@@ -31,7 +28,7 @@ class OfficesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val office = officesList[position]
+        val office = officeList[position]
         holder.tvOfficeName.text = office.name
 
         holder.tvOfficeName.setOnClickListener {
@@ -44,12 +41,12 @@ class OfficesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return officesList.size
+        return officeList.size
     }
 
-    fun updateData(newOffices: List<Offices>) {
+    fun updateData(newOffices: List<Office>) {
         Log.d("Adapter", "Updating data with ${newOffices.size} offices")
-        officesList = newOffices
+        officeList = newOffices
         notifyDataSetChanged()
     }
 }

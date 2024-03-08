@@ -12,12 +12,13 @@ import com.codingschool.deskbooking.data.model.authentication.equipment.Equipmen
 import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.data.repository.EquipmentRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DesksViewModel : ViewModel() {
+class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel() {
 
     private val equipmentRepository = EquipmentRepository()
-    private val desksRepository = DesksRepository()
+
 
     val desksLiveData = MutableLiveData<List<Desk>>()
     val equipmentLiveData = MutableLiveData<List<Equipment>>()
@@ -27,16 +28,40 @@ class DesksViewModel : ViewModel() {
     private val _equipments = MutableLiveData<List<Equipment>>()
     val equipments: LiveData<List<Equipment>> = _equipments
 
-    fun getDesksById(id: String) {
-        viewModelScope.launch {
+/*    fun getDesksById(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val desks = desksRepository.getDesksById()
-                desksLiveData.postValue(desks.filter { it.office.id == id })
+                val test = desksRepository.loadAllDesks().filter {
+                    it.office.id == id
+                }.apply {
+                    desksRepository.saveDesks(this)
+                    val savedDesk = desksRepository.getSavedDesks()
+                    desksLiveData.postValue(savedDesk)
+                }
+                desksRepository.saveDesks(test)
             } catch (e: Exception) {
                 errorMessageLiveData.postValue(e.message)
             }
         }
+    }*/
+
+    fun getDesksByOfficeId(id: String) {
+        viewModelScope.launch {
+            desksRepository.loadAllDesks()
+            desksRepository.getSavedDesks().collect { desks ->
+                desksLiveData.postValue(desks.filter {
+                    it.office.id == id
+                })
+            }
+        }
     }
+
+    fun loadAllDesk() {
+        viewModelScope.launch {
+            desksRepository.loadAllDesks()
+        }
+    }
+
 
     fun createBooking(deskId: String, startDate: String, endDate: String) {
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)
