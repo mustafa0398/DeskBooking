@@ -10,10 +10,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.dto.desks.Desk
+import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
+import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
 
-class DesksAdapter(private val bookingClickListener: BookingClickListener) : ListAdapter<Desk, DesksAdapter.DeskViewHolder>(DeskDiffCallback()) {
+class DesksAdapter(
+    private val bookingClickListener: BookingClickListener,
+    private var equipmentList: List<Equipment> = emptyList()
+
+) : ListAdapter<Desk, DesksAdapter.DeskViewHolder>(DeskDiffCallback()) {
 
     interface BookingClickListener {
         fun onBookingClick(createBooking: CreateBooking)
@@ -26,27 +31,41 @@ class DesksAdapter(private val bookingClickListener: BookingClickListener) : Lis
 
     override fun onBindViewHolder(holder: DeskViewHolder, position: Int) {
         val desk = getItem(position)
-        holder.bind(desk)
+        val equipment = equipmentList.getOrNull(position)
+        holder.bind(desk, equipment)
     }
+
 
     inner class DeskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val deskLabel: TextView = itemView.findViewById(R.id.tvDeskLabel)
         private val officeName: TextView = itemView.findViewById(R.id.tvOfficeName)
         private val btnReserve: Button = itemView.findViewById(R.id.btnDeskReserve)
+        private val equipmentName: TextView = itemView.findViewById(R.id.tvEquipmentName)
 
         init {
             btnReserve.setOnClickListener {
                 val desk = getItem(adapterPosition)
                 val createBooking = CreateBooking(dateStart = "", dateEnd = "", desk = desk.id)
                 bookingClickListener.onBookingClick(createBooking)
-                Toast.makeText(itemView.context, "Reserve button clicked", Toast.LENGTH_SHORT).show()
+                Toast.makeText(itemView.context, "Reserve button clicked", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
-        fun bind(desk: Desk) {
+        fun bind(desk: Desk, equipment: Equipment?) {
             deskLabel.text = desk.label
             officeName.text = desk.office.name
             desk.id
+            if (equipmentList.isNullOrEmpty()) {
+                equipmentName.text = "No Equipment"
+            } else {
+                val equipmentForDesk = equipmentList.find { it.id == desk.id }
+                if (equipmentForDesk != null) {
+                    equipmentName.text = equipmentForDesk.name
+                } else {
+                    equipmentName.text = "No Equipment"
+                }
+            }
         }
     }
 
@@ -60,4 +79,8 @@ class DesksAdapter(private val bookingClickListener: BookingClickListener) : Lis
         }
     }
 
+    fun updateEquipment(newEquipmentList: List<Equipment>) {
+        equipmentList = newEquipmentList
+        notifyDataSetChanged()
+    }
 }

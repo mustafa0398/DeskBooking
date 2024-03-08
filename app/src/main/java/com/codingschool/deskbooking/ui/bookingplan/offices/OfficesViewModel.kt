@@ -6,20 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.offices.Offices
+import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
 class OfficesViewModel : ViewModel() {
 
-    private val _offices = MutableLiveData<List<Offices>>()
-    val offices: LiveData<List<Offices>> get() = _offices
+    private val _office = MutableLiveData<List<Office>>()
+    val office: LiveData<List<Office>> get() = _office
     fun getAllOffices() {
         viewModelScope.launch {
             try {
-                val response = RetrofitClient.apiService.getAllOffices()
-                if (response.isSuccessful && response.body() != null) {
-                    Log.d("ViewModel", "Fetched offices: ${response.body()}")
-                    _offices.postValue(response.body())
+                val response = RetrofitClient.authenticationService.getAllOffices()
+                if (response.isSuccessful) {
+                    _office.postValue(response.body())
                 } else {
                     Log.e("ViewModel", "Error fetching offices: ${response.code()}")
                 }

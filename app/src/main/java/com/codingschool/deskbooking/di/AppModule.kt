@@ -2,6 +2,7 @@ package com.codingschool.deskbooking.di
 
 import com.codingschool.deskbooking.data.repository.CommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
+import com.codingschool.deskbooking.data.repository.FavouriteRepository
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.ProfileRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
@@ -13,6 +14,7 @@ import com.codingschool.deskbooking.ui.bookingplan.desks.DesksViewModel
 import com.codingschool.deskbooking.ui.login.LoginViewModel
 import com.codingschool.deskbooking.ui.bookingplan.offices.OfficesViewModel
 import com.codingschool.deskbooking.ui.profile.ProfileViewModel
+import com.codingschool.deskbooking.ui.favourite.FavouriteViewModel
 import com.codingschool.deskbooking.ui.register.RegisterViewModel
 import com.codingschool.deskbooking.ui.reservation.ReservationViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -35,7 +37,8 @@ val officesModule = module {
 }
 
 val desksModule = module {
-    viewModel { DesksViewModel() }
+    viewModel { DesksViewModel(desksRepository = get()) }
+
 }
 
 val reservationModule = module {
@@ -53,4 +56,9 @@ val profileModule = module {
     single { LoginRepository(get())}
     single { UserUpdateRepository(get()) }
     viewModel { ProfileViewModel(get(), get(), get()) }
+}
+
+val favouriteModule = module{
+    single { FavouriteRepository() }
+    viewModel { FavouriteViewModel(get()) }
 }
