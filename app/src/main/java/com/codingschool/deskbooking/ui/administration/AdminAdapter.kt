@@ -13,7 +13,7 @@ import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
 
 
-class AdminAdapter(private var items: List<Any>, private val listener: AdminActionListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), private val listener: AdminActionListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_FIX_DESK_REQUEST = 0
@@ -100,8 +100,17 @@ class AdminAdapter(private var items: List<Any>, private val listener: AdminActi
         }
     }
 
-    fun updateItems(newItems: List<Any>) {
-        items = newItems
+    fun updateItem(updatedFixDeskRequest: FixDeskResponse) {
+        val index = items.indexOfFirst { it is FixDeskResponse && it.id == updatedFixDeskRequest.id }
+        if (index >= 0) {
+            items[index] = updatedFixDeskRequest
+            notifyItemChanged(index)
+        }
+    }
+
+    fun updateItems(newItems: MutableList<Any>) {
+        items.clear()
+        items.addAll(newItems)
         notifyDataSetChanged()
     }
 }

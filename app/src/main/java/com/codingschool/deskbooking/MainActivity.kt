@@ -48,8 +48,15 @@ class MainActivity : AppCompatActivity() {
         loginViewModel.checkLoginStatus()
         loginViewModel.isLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
+                // Hier holen wir uns das Profil, aber Sie sollten auch navigieren
                 profileViewModel.fetchUserProfile()
+
+                // Überprüfen, ob wir bereits auf dem richtigen Bildschirm sind, um unnötige Navigation zu vermeiden
+                if (navController.currentDestination?.id !in listOf(R.id.bookingplanFragment)) {
+                    navController.navigate(R.id.bookingplanFragment)
+                }
             } else {
+                // Wenn nicht eingeloggt und wir sind nicht auf dem Login oder Register Bildschirm, navigieren Sie zurück zum Login
                 if (navController.currentDestination?.id !in listOf(R.id.loginFragment, R.id.registerFragment)) {
                     navController.navigate(R.id.loginFragment)
                 }

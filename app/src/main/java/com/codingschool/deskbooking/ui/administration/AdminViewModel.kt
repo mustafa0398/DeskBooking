@@ -54,13 +54,23 @@ class AdminViewModel(private val commentRepository: CommentRepository, private v
                 val update = FixDeskRequestUpdate(id, status)
                 val result = fixDeskRequestRepository.updateFixDeskRequest(update)
                 result.fold(
-                    onSuccess = { _ ->
+                    onSuccess = {
+                        // Aktualisieren Sie die Liste der FixDeskRequests mit dem neuen Status
+                        val updatedList = fixDeskRequests.value?.getOrThrow()?.map {
+                            if (it.id == id) it.copy(status = status) else it // Ändern Sie dies entsprechend Ihrer Datenstruktur
+                        }
+                        fixDeskRequests.value = Result.success(updatedList ?: listOf())
+
+                        // Aktualisieren Sie die UI mit der Erfolgsmeldung
                         val message = if (status == "approved") {
                             "Anfrage erfolgreich bestätigt."
                         } else {
                             "Anfrage erfolgreich abgelehnt."
                         }
                         updateResult.value = Result.success(message)
+
+
+
                     },
                     onFailure = { e ->
                         updateResult.value = Result.failure(e)
