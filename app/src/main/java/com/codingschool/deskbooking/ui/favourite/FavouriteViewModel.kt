@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.authentication.favourites.GetFavouriteResponse
+import com.codingschool.deskbooking.data.model.dto.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.data.repository.FavouriteRepository
-import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
 class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) : ViewModel() {
@@ -40,7 +39,18 @@ class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) :
 
     fun deleteFavourite(id: String) {
         viewModelScope.launch {
-            RetrofitClient.apiService.deleteFavourite(id)
+            favouriteRepository.deleteFavourite(id).fold(
+                onSuccess = {
+                    Log.d("FavouriteViewModel", "Favourite successfully deleted")
+                    _deleteResult.value = true
+                    // Rufen Sie hier getUserFavourites auf, um die Liste zu aktualisieren
+                    getUserFavourites()
+                },
+                onFailure = { exception ->
+                    Log.e("FavouriteViewModel", "Error deleting favourite: ${exception.message}", exception)
+                    _error.value = "Error deleting favourite: ${exception.message}"
+                }
+            )
         }
     }
 }

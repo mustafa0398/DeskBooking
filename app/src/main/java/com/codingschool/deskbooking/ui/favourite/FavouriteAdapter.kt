@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.favourites.GetFavouriteResponse
+import com.codingschool.deskbooking.data.model.dto.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 
 class FavouriteAdapter(private val favReserveClickListener: FavReserveClickListener) :

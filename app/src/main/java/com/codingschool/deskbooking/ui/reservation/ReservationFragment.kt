@@ -12,18 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener, ReservationAdapter.FavoriteClickListener {
 
-    private lateinit var reservationViewModel: ReservationViewModel
+    private val reservationViewModel: ReservationViewModel by viewModel()
     private lateinit var reservationAdapter: ReservationAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_reservation, container, false)
-
-        reservationViewModel = ViewModelProvider(this).get(ReservationViewModel::class.java)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.rvReservation)
         reservationAdapter = ReservationAdapter(this, this)

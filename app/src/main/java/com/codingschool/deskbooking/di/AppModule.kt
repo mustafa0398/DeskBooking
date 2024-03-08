@@ -1,10 +1,12 @@
 package com.codingschool.deskbooking.di
 
 import com.codingschool.deskbooking.data.repository.AdminCommentRepository
+import com.codingschool.deskbooking.data.repository.CommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import com.codingschool.deskbooking.data.repository.FavouriteRepository
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.ProfileRepository
+import com.codingschool.deskbooking.data.repository.ReservationRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.data.repository.UserUpdateRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
@@ -42,6 +44,10 @@ val desksModule = module {
 }
 
 val reservationModule = module {
+    single { CommentRepository(get()) }
+    single { FavouriteRepository(get(), get()) }
+    single { ReservationRepository(get()) }
+    single { UserRepository(get()) }
     viewModel { ReservationViewModel(get(), get(), get(), get()) }
 }
 

@@ -9,10 +9,8 @@ import com.codingschool.deskbooking.service.api.RetrofitClient
 
 import retrofit2.Response
 
-class CommentRepository() {
+class CommentRepository(private val apiService: ApiService) {
     suspend fun createComment(createCommentRequest: CreateCommentRequest): Response<CreateCommentResponse> {
-        return RetrofitClient.apiService.createComment(createCommentRequest)
+        return apiService.createComment(createCommentRequest)
     }
-
-
 }

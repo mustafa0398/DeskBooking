@@ -1,9 +1,6 @@
-package com.codingschool.deskbooking.data.model.authentication.favourites
+package com.codingschool.deskbooking.data.model.dto.favourites
 
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
-import com.codingschool.deskbooking.data.model.dto.desks.Desk
-import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
-import com.codingschool.deskbooking.data.model.dto.user.User
 
 
 data class GetFavouriteResponse(

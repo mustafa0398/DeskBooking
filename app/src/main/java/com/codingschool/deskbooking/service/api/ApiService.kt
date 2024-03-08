@@ -4,7 +4,7 @@ import com.codingschool.deskbooking.data.model.authentication.comment.CreateComm
 import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentResponse
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteRequest
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
-import com.codingschool.deskbooking.data.model.authentication.favourites.GetFavouriteResponse
+import com.codingschool.deskbooking.data.model.dto.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
@@ -14,6 +14,7 @@ import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRequestUpdate
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponseUpdate
 import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
+import com.codingschool.deskbooking.data.model.dto.favourites.DeleteFavouriteResponse
 import com.codingschool.deskbooking.data.model.dto.login.Login
 import com.codingschool.deskbooking.data.model.dto.login.LoginResponse
 import com.codingschool.deskbooking.data.model.dto.register.Register
@@ -92,7 +93,7 @@ interface ApiService {
     @DELETE("api/favourites/{id}")
     suspend fun deleteFavourite(
         @Path("id") id: String
-    )
+    ): Response<DeleteFavouriteResponse>
 
     @GET("/api/comments")
     suspend fun getAllComments(
