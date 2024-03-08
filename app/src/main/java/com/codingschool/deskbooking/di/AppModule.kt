@@ -5,6 +5,7 @@ import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.ProfileRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
+import com.codingschool.deskbooking.data.repository.UserUpdateRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import com.codingschool.deskbooking.service.api.ApiService
 import com.codingschool.deskbooking.ui.administration.AdminViewModel
@@ -22,7 +23,7 @@ val appModule = module {
     single<ApiService> { RetrofitClient.apiService }
     single { LoginRepository(get()) }
     single { UserRepository(get()) }
-    viewModel { LoginViewModel(get(), get()) }
+    viewModel { LoginViewModel(get()) }
 }
 
 val registerModule = module {
@@ -50,5 +51,6 @@ val adminModule = module {
 val profileModule = module {
     single { ProfileRepository(get()) }
     single { LoginRepository(get())}
-    viewModel { ProfileViewModel(get(), get()) }
+    single { UserUpdateRepository(get()) }
+    viewModel { ProfileViewModel(get(), get(), get()) }
 }

@@ -6,18 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.login.Login
 import com.codingschool.deskbooking.data.model.dto.login.LoginResponse
 import com.codingschool.deskbooking.data.repository.LoginRepository
-import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val loginRepository: LoginRepository,
-    private val userRepository: UserRepository
+    private val loginRepository: LoginRepository
 ) : ViewModel() {
     val response = MutableLiveData<Result<LoginResponse>>()
     val isLoggedIn = MutableLiveData<Boolean>()
 
-    // Führt den Login-Vorgang aus und speichert Tokens bei Erfolg.
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
@@ -37,7 +34,6 @@ class LoginViewModel(
         }
     }
 
-    // Überprüft, ob ein Zugriffstoken vorhanden ist, was bedeutet, dass der Benutzer eingeloggt ist.
     fun checkLoginStatus() {
         viewModelScope.launch {
             val accessToken = loginRepository.getAccessToken()

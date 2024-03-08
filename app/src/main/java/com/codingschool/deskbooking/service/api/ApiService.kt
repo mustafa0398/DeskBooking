@@ -15,6 +15,7 @@ import com.codingschool.deskbooking.data.model.dto.register.RegisterResponse
 import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.data.model.dto.profile.ProfileResponse
 import com.codingschool.deskbooking.data.model.dto.user.User
+import com.codingschool.deskbooking.data.model.dto.user.UserUpdate
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -80,4 +81,11 @@ interface ApiService {
     @GET("/api/users/profile")
     suspend fun getProfile(
     ): Response<ProfileResponse>
+
+    @PUT("/api/users/{id}")
+    suspend fun updateUser(
+        @Path("id") id: String,
+        @Body userUpdate: UserUpdate
+    ): Response<UserUpdate>
+
 }

@@ -20,15 +20,6 @@ class MainActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModel()
     private val profileViewModel: ProfileViewModel by viewModel()
 
-    private val adminEmails = setOf(
-        "admin1@csaw.at",
-        "admin2@csaw.at",
-        "admin3@csaw.at",
-        "admin4@csaw.at",
-        "admin5@csaw.at",
-        "admin6@csaw.at"
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,21 +39,16 @@ class MainActivity : AppCompatActivity() {
         loginViewModel.checkLoginStatus()
         loginViewModel.isLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
-                // Hier holen wir uns das Profil, aber Sie sollten auch navigieren
                 profileViewModel.fetchUserProfile()
-
-                // Überprüfen, ob wir bereits auf dem richtigen Bildschirm sind, um unnötige Navigation zu vermeiden
                 if (navController.currentDestination?.id !in listOf(R.id.bookingplanFragment)) {
                     navController.navigate(R.id.bookingplanFragment)
                 }
             } else {
-                // Wenn nicht eingeloggt und wir sind nicht auf dem Login oder Register Bildschirm, navigieren Sie zurück zum Login
                 if (navController.currentDestination?.id !in listOf(R.id.loginFragment, R.id.registerFragment)) {
                     navController.navigate(R.id.loginFragment)
                 }
             }
         }
-
 
         profileViewModel.isLoggedOut.observe(this) { isLoggedOut ->
             if (isLoggedOut) {
@@ -71,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
