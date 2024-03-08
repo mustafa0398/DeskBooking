@@ -16,29 +16,38 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvDesk"
+            android:id="@+id/tvFavDeskLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="Desk Label"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tvDescription"
+            android:id="@+id/tvFavOffice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="Office Name"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/tvDesk"
+            app:layout_constraintTop_toBottomOf="@+id/tvFavDeskLabel"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btnReserve"
+            android:id="@+id/btnFavReserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reserve"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnFavDelete"/>
+
+        <Button
+            android:id="@+id/btnFavDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

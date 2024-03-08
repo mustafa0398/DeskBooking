@@ -6,6 +6,9 @@ import com.codingschool.deskbooking.data.model.authentication.comment.CreateComm
 import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentResponse
 import com.codingschool.deskbooking.data.model.authentication.desks.Desk
 import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
+import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteRequest
+import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
+import com.codingschool.deskbooking.data.model.authentication.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.data.model.authentication.login.Login
 import com.codingschool.deskbooking.data.model.authentication.login.LoginResponse
 import com.codingschool.deskbooking.data.model.authentication.register.Register
@@ -14,6 +17,7 @@ import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.data.model.authentication.user.User
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -55,7 +59,7 @@ interface AuthenticationService {
         @Body createBooking: CreateBooking
     ): Response<BookingResponse>
 
-    @GET("/api/bookings/user/{id}")
+    @GET("api/bookings/user/{id}")
     suspend fun getBookingsFromUser(
         @Path("id") userId: String
     ): Response<List<BookingResponse>>
@@ -64,4 +68,18 @@ interface AuthenticationService {
     suspend fun createComment(
         @Body createCommentRequest: CreateCommentRequest
     ): Response<CreateCommentResponse>
+
+    @POST("api/favourites")
+    suspend fun createFavourite(
+        @Body createFavouriteRequest: CreateFavouriteRequest
+    ): Response<CreateFavouriteResponse>
+    @GET("api/favourites/user/{userId}")
+    suspend fun getUserFavorites(
+        @Path("userId") userId: String
+    ): List<GetFavouriteResponse>
+
+    @DELETE("api/favourites/{id}")
+    suspend fun deleteFavourite(
+        @Path("id") id: String
+    )
 }

@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
+import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
 
-class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener {
+class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener, ReservationAdapter.FavoriteClickListener {
 
     private lateinit var reservationViewModel: ReservationViewModel
     private lateinit var reservationAdapter: ReservationAdapter
@@ -25,7 +26,7 @@ class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener 
         reservationViewModel = ViewModelProvider(this).get(ReservationViewModel::class.java)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.rvReservation)
-        reservationAdapter = ReservationAdapter(this)
+        reservationAdapter = ReservationAdapter(this, this)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = reservationAdapter
 
@@ -39,5 +40,8 @@ class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener 
     }
     override fun onCommentSendClicked(booking: BookingResponse, comment: String) {
         reservationViewModel.createComment(comment, booking.desk.id)
+    }
+    override fun onFavoriteClicked(favourite: CreateFavouriteResponse) {
+        reservationViewModel.createFavourite(favourite.desk)
     }
 }
