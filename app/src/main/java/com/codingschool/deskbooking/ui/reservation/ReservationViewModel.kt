@@ -15,12 +15,13 @@ import com.codingschool.deskbooking.data.repository.UserRepository
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.inject
 
-class ReservationViewModel : ViewModel() {
 
-    private val userRepository: UserRepository by inject(UserRepository::class.java)
-    private val favouriteRepository = FavouriteRepository()
-    private val commentRepository = CommentRepository()
-    private val reservationRepository = ReservationRepository()
+class ReservationViewModel(
+    private val userRepository: UserRepository,
+    private val favouriteRepository: FavouriteRepository,
+    private val commentRepository: CommentRepository,
+    private val reservationRepository: ReservationRepository
+) : ViewModel() {
 
     private val _userBookings = MutableLiveData<List<BookingResponse>>()
     val userBookings: LiveData<List<BookingResponse>> = _userBookings

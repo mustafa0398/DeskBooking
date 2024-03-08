@@ -83,7 +83,8 @@ interface ApiService {
     suspend fun createFavourite(
         @Body createFavouriteRequest: CreateFavouriteRequest
     ): Response<CreateFavouriteResponse>
-    @GET("api/favourites/user/{userId}")
+
+    @GET("/api/favourites/user/{userId}")
     suspend fun getUserFavorites(
         @Path("userId") userId: String
     ): Response<List<GetFavouriteResponse>>
@@ -92,7 +93,6 @@ interface ApiService {
     suspend fun deleteFavourite(
         @Path("id") id: String
     )
-
 
     @GET("/api/comments")
     suspend fun getAllComments(

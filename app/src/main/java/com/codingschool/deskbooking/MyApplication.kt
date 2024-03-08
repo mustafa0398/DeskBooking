@@ -14,10 +14,12 @@ import com.codingschool.deskbooking.di.officesModule
 import com.codingschool.deskbooking.di.profileModule
 import com.codingschool.deskbooking.di.registerModule
 import com.codingschool.deskbooking.di.reservationModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        AndroidThreeTen.init(this)
         startKoin {
             androidContext(this@MyApplication)
             modules(dataModule, appModule, registerModule, officesModule, desksModule, reservationModule, favouriteModule, adminModule, profileModule)

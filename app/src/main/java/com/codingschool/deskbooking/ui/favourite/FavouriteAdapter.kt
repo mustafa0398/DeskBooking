@@ -33,7 +33,7 @@ class FavouriteAdapter(private val favReserveClickListener: FavReserveClickListe
 
     inner class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val favDeskLabel: TextView = itemView.findViewById(R.id.tvFavDeskLabel)
-        private val favDeskOfficeName: TextView = itemView.findViewById(R.id.tvDeskOfficeName)
+        private val favDeskOfficeName: TextView = itemView.findViewById(R.id.tvFavOffice)
         private val btnFav: Button = itemView.findViewById(R.id.btnFavReserve)
         private val btnDel: Button = itemView.findViewById(R.id.btnFavDelete)
 
@@ -43,7 +43,7 @@ class FavouriteAdapter(private val favReserveClickListener: FavReserveClickListe
                 val createBooking = CreateBooking(dateStart = "", dateEnd = "", desk = favourite.id)
                 favReserveClickListener.onFavReserveClicked(createBooking)
             }
-            btnFav.setOnClickListener {
+            btnDel.setOnClickListener {
                 val favourite = getItem(adapterPosition)
                 favReserveClickListener.onDeleteFavouriteClicked(favourite.id)
             }
