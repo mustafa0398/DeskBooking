@@ -5,14 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.codingschool.deskbooking.data.model.authentication.offices.Offices
+import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.R
 
 class OfficesAdapter(

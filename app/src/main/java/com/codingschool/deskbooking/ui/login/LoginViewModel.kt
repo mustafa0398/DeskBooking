@@ -3,8 +3,8 @@ package com.codingschool.deskbooking.ui.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.authentication.login.Login
-import com.codingschool.deskbooking.data.model.authentication.login.LoginResponse
+import com.codingschool.deskbooking.data.model.dto.login.Login
+import com.codingschool.deskbooking.data.model.dto.login.LoginResponse
 import com.codingschool.deskbooking.data.repository.LoginRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
@@ -21,11 +21,12 @@ class LoginViewModel(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
-                val result = RetrofitClient.authenticationService.loginUser(Login(email, password))
+                val result = RetrofitClient.apiService.loginUser(Login(email, password))
                 if (result.isSuccessful && result.body() != null) {
                     val loginResponse = result.body()!!
                     response.postValue(Result.success(loginResponse))
                     loginRepository.saveLoginTokens(loginResponse.token, loginResponse.refresh)
+                    RetrofitClient.authToken = loginResponse.token
                 } else {
                     val errorMessage = result.errorBody()?.string() ?: "Unbekannter Fehler"
                     response.postValue(Result.failure(Exception("Login fehlgeschlagen: $errorMessage")))

@@ -3,7 +3,7 @@ package com.codingschool.deskbooking.data.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.dto.desks.Desk
 
 @Dao
 interface DeskDao {

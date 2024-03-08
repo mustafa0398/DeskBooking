@@ -1,6 +1,5 @@
 package com.codingschool.deskbooking.service.api
 
-import com.codingschool.deskbooking.service.authentication.AuthenticationService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,8 +35,8 @@ object RetrofitClient {
             .build()
     }
 
-    val authenticationService: AuthenticationService by lazy {
-        instance.create(AuthenticationService::class.java)
+    val apiService: ApiService by lazy {
+        instance.create(ApiService::class.java)
     }
 }
 

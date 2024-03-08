@@ -1,6 +1,6 @@
-package com.codingschool.deskbooking.data.model.authentication.offices
+package com.codingschool.deskbooking.data.model.dto.offices
 
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.dto.desks.Desk
 
 data class Offices(
     val name: String,

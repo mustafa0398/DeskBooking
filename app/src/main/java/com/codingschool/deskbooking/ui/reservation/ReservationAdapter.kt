@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
+import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 
 class ReservationAdapter : ListAdapter<BookingResponse, ReservationAdapter.ReservationViewHolder>(BookingDiffCallback()) {
 

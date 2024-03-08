@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
+import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
+import com.codingschool.deskbooking.data.model.dto.desks.Desk
 import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
@@ -33,7 +33,7 @@ class DesksViewModel : ViewModel() {
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)
         viewModelScope.launch {
             try {
-                val result = RetrofitClient.authenticationService.createBooking(createBooking)
+                val result = RetrofitClient.apiService.createBooking(createBooking)
                 if (result.isSuccessful) {
                     val bookingResponse = result.body()!!
                 } else {

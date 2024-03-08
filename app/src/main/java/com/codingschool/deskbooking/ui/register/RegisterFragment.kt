@@ -12,7 +12,7 @@ import com.codingschool.deskbooking.R
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.navigation.fragment.findNavController
-import com.codingschool.deskbooking.data.model.authentication.register.Register
+import com.codingschool.deskbooking.data.model.dto.register.Register
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel

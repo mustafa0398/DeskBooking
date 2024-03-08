@@ -1,4 +1,3 @@
-// DesksAdapter.kt
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
 import android.view.LayoutInflater
@@ -11,8 +10,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
+import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
+import com.codingschool.deskbooking.data.model.dto.desks.Desk
 
 class DesksAdapter(private val bookingClickListener: BookingClickListener) : ListAdapter<Desk, DesksAdapter.DeskViewHolder>(DeskDiffCallback()) {
 

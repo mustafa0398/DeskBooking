@@ -1,7 +1,7 @@
-package com.codingschool.deskbooking.data.model.authentication.desks
+package com.codingschool.deskbooking.data.model.dto.desks
 
-import com.codingschool.deskbooking.data.model.authentication.offices.Offices
-import com.codingschool.deskbooking.data.model.authentication.user.User
+import com.codingschool.deskbooking.data.model.dto.offices.Offices
+import com.codingschool.deskbooking.data.model.dto.user.User
 
 data class Desk(
     val label: String,

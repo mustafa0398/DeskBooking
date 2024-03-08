@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.codingschool.deskbooking.R
+import com.codingschool.deskbooking.ui.profile.ProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +18,7 @@ class LoginFragment : Fragment() {
     private lateinit var etLoginEmail: EditText
     private lateinit var etLoginPassword: EditText
     private val viewModel: LoginViewModel by viewModel()
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,12 +50,14 @@ class LoginFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner) { result ->
             result.fold(onSuccess = {
+                profileViewModel.fetchUserProfile()
                 findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
             }, onFailure = {
                 showSnackbar(view, getString(R.string.login_failure))
             })
         }
     }
+
 
     private fun showSnackbar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()

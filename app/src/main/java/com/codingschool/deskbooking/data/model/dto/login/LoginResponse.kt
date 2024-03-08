@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.data.model.authentication.login
+package com.codingschool.deskbooking.data.model.dto.login
 
 data class LoginResponse(
     val token: String,

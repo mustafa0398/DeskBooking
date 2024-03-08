@@ -3,8 +3,8 @@ package com.codingschool.deskbooking.ui.register
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.authentication.register.Register
-import com.codingschool.deskbooking.data.model.authentication.register.RegisterResponse
+import com.codingschool.deskbooking.data.model.dto.register.Register
+import com.codingschool.deskbooking.data.model.dto.register.RegisterResponse
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
@@ -17,7 +17,7 @@ class RegisterViewModel : ViewModel() {
         // Ruft `authenticationService.registerUser(register)` auf und verarbeitet die Antwort.
         viewModelScope.launch {
             try {
-                val result = RetrofitClient.authenticationService.registerUser(register)
+                val result = RetrofitClient.apiService.registerUser(register)
                 if (result.isSuccessful && result.body() != null) {
                     response.postValue(Result.success(result.body()!!))
                 } else {

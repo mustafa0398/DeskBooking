@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.data.model.authentication.bookings
+package com.codingschool.deskbooking.data.model.dto.bookings
 
 data class CreateBooking(
     val dateStart: String,

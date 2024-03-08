@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
+import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 import com.codingschool.deskbooking.data.repository.ReservationRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
-import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.inject
 

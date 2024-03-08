@@ -11,8 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import org.threeten.bp.LocalDate
+import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 

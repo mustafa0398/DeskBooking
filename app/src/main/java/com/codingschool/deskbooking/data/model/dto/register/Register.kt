@@ -1,4 +1,4 @@
-package com.codingschool.deskbooking.data.model.authentication.register
+package com.codingschool.deskbooking.data.model.dto.register
 
 data class Register(
     val firstname: String,
