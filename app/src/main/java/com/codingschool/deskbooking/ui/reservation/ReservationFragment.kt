@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
+import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 
 class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener, ReservationAdapter.FavoriteClickListener {
 

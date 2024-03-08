@@ -37,7 +37,7 @@ class FavouriteViewModel(private val favouriteRepository : FavouriteRepository) 
 
     fun deleteFavourite(id: String) {
         viewModelScope.launch {
-            RetrofitClient.authenticationService.deleteFavourite(id)
+            RetrofitClient.apiService.deleteFavourite(id)
         }
     }
 }

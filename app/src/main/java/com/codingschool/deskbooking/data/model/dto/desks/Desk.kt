@@ -2,19 +2,13 @@ package com.codingschool.deskbooking.data.model.dto.desks
 
 import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.RoomWarnings
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
-import com.codingschool.deskbooking.data.model.authentication.offices.OfficeRoom
-import com.codingschool.deskbooking.data.model.authentication.offices.toOffice
-import com.codingschool.deskbooking.data.model.authentication.offices.toOfficeRoom
-import com.codingschool.deskbooking.data.model.authentication.user.User
-import com.codingschool.deskbooking.data.model.authentication.user.UserRoom
-import com.codingschool.deskbooking.data.model.authentication.user.toUser
-import com.codingschool.deskbooking.data.model.authentication.user.toUserRoom
-import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.data.model.dto.user.User
+import com.codingschool.deskbooking.data.model.dto.user.UserRoom
+import com.codingschool.deskbooking.data.model.dto.user.toUser
+import com.codingschool.deskbooking.data.model.dto.user.toUserRoom
 
 data class Desk(
     val label: String,

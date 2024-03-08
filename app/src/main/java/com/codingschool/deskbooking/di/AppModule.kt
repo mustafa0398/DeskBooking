@@ -1,5 +1,6 @@
 package com.codingschool.deskbooking.di
 
+import com.codingschool.deskbooking.data.repository.AdminCommentRepository
 import com.codingschool.deskbooking.data.repository.CommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import com.codingschool.deskbooking.data.repository.FavouriteRepository
@@ -46,7 +47,7 @@ val reservationModule = module {
 }
 
 val adminModule = module {
-    single { CommentRepository(get()) }
+    single { AdminCommentRepository(get()) }
     single { FixDeskRequestRepository(get()) }
     viewModel { AdminViewModel(get(), get()) }
 }

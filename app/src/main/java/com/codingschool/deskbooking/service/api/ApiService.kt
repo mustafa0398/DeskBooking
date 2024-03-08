@@ -1,5 +1,11 @@
 package com.codingschool.deskbooking.service.api
 
+import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentRequest
+import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentResponse
+import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteRequest
+import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
+import com.codingschool.deskbooking.data.model.authentication.favourites.GetFavouriteResponse
+import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
@@ -12,12 +18,12 @@ import com.codingschool.deskbooking.data.model.dto.login.Login
 import com.codingschool.deskbooking.data.model.dto.login.LoginResponse
 import com.codingschool.deskbooking.data.model.dto.register.Register
 import com.codingschool.deskbooking.data.model.dto.register.RegisterResponse
-import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.data.model.dto.profile.ProfileResponse
 import com.codingschool.deskbooking.data.model.dto.user.User
 import com.codingschool.deskbooking.data.model.dto.user.UserUpdate
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -37,13 +43,16 @@ interface ApiService {
     ): Response<LoginResponse>
 
     @GET("api/offices")
-    suspend fun getAllOffices(): Response<List<Offices>>
+    suspend fun getAllOffices(): Response<List<Office>>
 
     @GET("api/offices/{id}")
-    suspend fun getOfficeById(@Path("id") id: String): Response<Offices>
+    suspend fun getOfficeById(@Path("id") id: String): Response<Office>
 
     @GET("api/desks")
     suspend fun getDesksById(): Response<List<Desk>>
+
+    @GET("api/desks")
+    suspend fun getAllDesks(): Response<List<Desk>>
 
     @GET("api/users/profile")
     suspend fun getUserProfile(): Response<User>
@@ -59,10 +68,31 @@ interface ApiService {
         @Body createBooking: CreateBooking
     ): Response<BookingResponse>
 
+    @POST("api/comments")
+    suspend fun createComment(
+        @Body createCommentRequest: CreateCommentRequest
+    ): Response<CreateCommentResponse>
+
+
     @GET("/api/bookings/user/{id}")
     suspend fun getBookingsFromUser(
         @Path("id") userId: String
     ): Response<List<BookingResponse>>
+
+    @POST("api/favourites")
+    suspend fun createFavourite(
+        @Body createFavouriteRequest: CreateFavouriteRequest
+    ): Response<CreateFavouriteResponse>
+    @GET("api/favourites/user/{userId}")
+    suspend fun getUserFavorites(
+        @Path("userId") userId: String
+    ): Response<List<GetFavouriteResponse>>
+
+    @DELETE("api/favourites/{id}")
+    suspend fun deleteFavourite(
+        @Path("id") id: String
+    )
+
 
     @GET("/api/comments")
     suspend fun getAllComments(

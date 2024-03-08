@@ -7,13 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRequestUpdate
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
-import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponseUpdate
-import com.codingschool.deskbooking.data.repository.CommentRepository
+import com.codingschool.deskbooking.data.repository.AdminCommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import kotlinx.coroutines.launch
 
 
-class AdminViewModel(private val commentRepository: CommentRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
+class AdminViewModel(private val commentRepository: AdminCommentRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
     val comments = MutableLiveData<Result<List<CommentResponse>>>()
     val fixDeskRequests = MutableLiveData<Result<List<FixDeskResponse>>>()
     val updateResult = MutableLiveData<Result<String>>()

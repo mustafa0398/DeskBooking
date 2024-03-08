@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
@@ -17,7 +16,7 @@ class OfficesViewModel : ViewModel() {
     fun getAllOffices() {
         viewModelScope.launch {
             try {
-                val response = RetrofitClient.authenticationService.getAllOffices()
+                val response = RetrofitClient.apiService.getAllOffices()
                 if (response.isSuccessful) {
                     _office.postValue(response.body())
                 } else {

@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
-import com.codingschool.deskbooking.data.model.authentication.desks.DeskRoom
+import com.codingschool.deskbooking.data.model.dto.desks.DeskRoom
+
 import kotlinx.coroutines.flow.Flow
 
 @Dao

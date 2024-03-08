@@ -8,14 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 import com.codingschool.deskbooking.data.model.dto.desks.Desk
-import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
-import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
+import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
 import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.data.repository.EquipmentRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel() {
@@ -30,23 +26,6 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
 
     private val _equipments = MutableLiveData<List<Equipment>>()
     val equipments: LiveData<List<Equipment>> = _equipments
-
-/*    fun getDesksById(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val test = desksRepository.loadAllDesks().filter {
-                    it.office.id == id
-                }.apply {
-                    desksRepository.saveDesks(this)
-                    val savedDesk = desksRepository.getSavedDesks()
-                    desksLiveData.postValue(savedDesk)
-                }
-                desksRepository.saveDesks(test)
-            } catch (e: Exception) {
-                errorMessageLiveData.postValue(e.message)
-            }
-        }
-    }*/
 
     fun getDesksByOfficeId(id: String) {
         viewModelScope.launch {
@@ -70,7 +49,7 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)
         viewModelScope.launch {
             try {
-                val result = RetrofitClient.authenticationService.createBooking(createBooking)
+                val result = RetrofitClient.apiService.createBooking(createBooking)
                 if (result.isSuccessful) {
                     val bookingResponse = result.body()!!
                 } else {

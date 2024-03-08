@@ -8,10 +8,10 @@ import retrofit2.Response
 
 class FavouriteRepository {
     suspend fun createFavourite(createFavouriteRequest: CreateFavouriteRequest): Response<CreateFavouriteResponse> {
-        return RetrofitClient.authenticationService.createFavourite(createFavouriteRequest)
+        return RetrofitClient.apiService.createFavourite(createFavouriteRequest)
     }
     suspend fun getUserFavorites(userId: String): Response<List<GetFavouriteResponse>> {
-        val favorites = RetrofitClient.authenticationService.getUserFavorites(userId)
+        val favorites = RetrofitClient.apiService.getUserFavorites(userId)
         return Response.success(favorites)
     }
 }

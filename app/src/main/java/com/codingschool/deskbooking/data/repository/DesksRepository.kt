@@ -1,11 +1,9 @@
 package com.codingschool.deskbooking.data.repository
 
 import com.codingschool.deskbooking.data.local.dao.DeskDao
-import com.codingschool.deskbooking.data.model.authentication.desks.Desk
-import com.codingschool.deskbooking.data.model.authentication.desks.toDesk
-import com.codingschool.deskbooking.data.model.authentication.desks.toDeskRoom
 import com.codingschool.deskbooking.data.model.dto.desks.Desk
-import com.codingschool.deskbooking.data.model.dto.offices.Offices
+import com.codingschool.deskbooking.data.model.dto.desks.toDesk
+import com.codingschool.deskbooking.data.model.dto.desks.toDeskRoom
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,7 +16,7 @@ interface DesksRepository{
 
 class DesksRepositoryImpl(val deskDao: DeskDao) : DesksRepository {
     override suspend fun loadAllDesks() {
-        RetrofitClient.authenticationService.getAllDesks().let {response ->
+        RetrofitClient.apiService.getAllDesks().let {response ->
              if (response.isSuccessful) {
                 val deskList = response.body()?: emptyList()
                 saveDesks(deskList)

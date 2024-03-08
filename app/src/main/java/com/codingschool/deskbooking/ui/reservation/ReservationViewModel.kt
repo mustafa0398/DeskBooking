@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
 import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentRequest
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteRequest
 import com.codingschool.deskbooking.data.repository.CommentRepository

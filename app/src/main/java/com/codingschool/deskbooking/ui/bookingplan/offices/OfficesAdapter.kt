@@ -10,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
-import com.codingschool.deskbooking.data.model.dto.offices.Offices
 import com.codingschool.deskbooking.R
 
 class OfficesAdapter(

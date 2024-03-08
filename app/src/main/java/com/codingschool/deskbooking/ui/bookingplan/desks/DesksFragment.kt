@@ -6,14 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
-import com.codingschool.deskbooking.data.model.authentication.bookings.CreateBooking
-import com.codingschool.deskbooking.data.model.authentication.equipment.Equipment
 import org.koin.android.ext.android.inject
-import org.threeten.bp.LocalDate
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter

@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.codingschool.deskbooking.data.local.dao.DeskDao
-import com.codingschool.deskbooking.data.model.authentication.desks.DeskRoom
-import com.codingschool.deskbooking.data.model.authentication.desks.FixDeskRoom
 import com.codingschool.deskbooking.data.model.authentication.offices.OfficeRoom
-import com.codingschool.deskbooking.data.model.authentication.user.UserRoom
+import com.codingschool.deskbooking.data.model.dto.desks.DeskRoom
+import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRoom
+import com.codingschool.deskbooking.data.model.dto.user.UserRoom
+
 
 @Database(entities = [DeskRoom::class, UserRoom::class, OfficeRoom::class, FixDeskRoom::class], version = 1, exportSchema = false)
 @TypeConverters(ObjectConverter::class)

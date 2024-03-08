@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
-import com.codingschool.deskbooking.data.model.authentication.bookings.BookingResponse
-import com.codingschool.deskbooking.data.model.authentication.comment.CreateCommentResponse
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
 
 class ReservationAdapter(

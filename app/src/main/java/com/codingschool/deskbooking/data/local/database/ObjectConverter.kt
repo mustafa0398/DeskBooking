@@ -1,11 +1,11 @@
 package com.codingschool.deskbooking.data.local.database
 
 import androidx.room.TypeConverter
-import com.codingschool.deskbooking.data.model.authentication.desks.FixDesk
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.codingschool.deskbooking.data.model.authentication.offices.Office
-import com.codingschool.deskbooking.data.model.authentication.user.User
+import com.codingschool.deskbooking.data.model.dto.desks.FixDesk
+import com.codingschool.deskbooking.data.model.dto.user.User
 import java.lang.reflect.Type
 
 class ObjectConverter {
