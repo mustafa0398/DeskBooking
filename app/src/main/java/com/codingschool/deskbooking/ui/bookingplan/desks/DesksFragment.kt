@@ -58,12 +58,12 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
     override fun onBookingClick(createBooking: CreateBooking) {
         val deskId = createBooking.desk
-        val startDate = LocalDateTime.now()
-        val endDate = LocalDateTime.now()
+        val startDate = createBooking.dateStart
+        val endDate = createBooking.dateEnd
         desksViewModel.createBooking(
             deskId,
-            startDate.format(DateTimeFormatter.ISO_DATE_TIME),
-            endDate.format(DateTimeFormatter.ISO_DATE_TIME)
+            startDate,
+            endDate
         )
     }
 

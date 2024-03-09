@@ -1,5 +1,6 @@
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
+import android.app.DatePickerDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,10 @@ import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.desks.Desk
 import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class DesksAdapter(
@@ -42,16 +47,83 @@ class DesksAdapter(
         private val officeName: TextView = itemView.findViewById(R.id.tvOfficeName)
         private val btnReserve: Button = itemView.findViewById(R.id.btnDeskReserve)
         private val equipmentName: TextView = itemView.findViewById(R.id.tvEquipmentName)
+        private val btnStartDate: Button = itemView.findViewById(R.id.btnStartDate)
+        private val btnEndDate: Button = itemView.findViewById(R.id.btnEndDate)
+        private val tvDateStart: TextView = itemView.findViewById(R.id.tvDeskDateStart)
+        private val tvDateEnd: TextView = itemView.findViewById(R.id.tvDeskDateEnd)
+
+        private val startCalendar = Calendar.getInstance()
+        private val endCalendar = Calendar.getInstance()
+
+        private val startDatePicker =
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                startCalendar.set(Calendar.YEAR, year)
+                startCalendar.set(Calendar.MONTH, month)
+                startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateLabel(tvDateStart, startCalendar)
+            }
+
+        private val endDatePicker =
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                endCalendar.set(Calendar.YEAR, year)
+                endCalendar.set(Calendar.MONTH, month)
+                endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateLabel(tvDateEnd, endCalendar)
+            }
 
         init {
             btnReserve.setOnClickListener {
                 val desk = getItem(adapterPosition)
-                val createBooking = CreateBooking(dateStart = "", dateEnd = "", desk = desk.id)
-                bookingClickListener.onBookingClick(createBooking)
-                Toast.makeText(itemView.context, "Reserve button clicked", Toast.LENGTH_SHORT)
-                    .show()
+                val selectedStartDate = tvDateStart.text.toString()
+                val selectedEndDate = tvDateEnd.text.toString()
+
+                val dateFormatPattern = "dd-MM-yyyy"
+
+                val formatter = SimpleDateFormat(dateFormatPattern, Locale.getDefault())
+                val isoFormatter =
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+
+                try {
+                    val startDate = formatter.parse(selectedStartDate)
+                    val endDate = formatter.parse(selectedEndDate)
+
+                    val isoStartDate = isoFormatter.format(startDate!!)
+                    val isoEndDate = isoFormatter.format(endDate!!)
+
+                    val createBooking = CreateBooking(
+                        dateStart = isoStartDate,
+                        dateEnd = isoEndDate,
+                        desk = desk.id
+                    )
+                    bookingClickListener.onBookingClick(createBooking)
+                    Toast.makeText(itemView.context, "Reserve button clicked", Toast.LENGTH_SHORT)
+                        .show()
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+            }
+
+            btnStartDate.setOnClickListener {
+                DatePickerDialog(
+                    itemView.context,
+                    startDatePicker,
+                    startCalendar.get(Calendar.YEAR),
+                    startCalendar.get(Calendar.MONTH),
+                    startCalendar.get(Calendar.DAY_OF_MONTH)
+                ).show()
+            }
+
+            btnEndDate.setOnClickListener {
+                DatePickerDialog(
+                    itemView.context,
+                    endDatePicker,
+                    endCalendar.get(Calendar.YEAR),
+                    endCalendar.get(Calendar.MONTH),
+                    endCalendar.get(Calendar.DAY_OF_MONTH)
+                ).show()
             }
         }
+
 
         fun bind(desk: Desk, equipment: Equipment?) {
             deskLabel.text = desk.label
@@ -68,7 +140,14 @@ class DesksAdapter(
                 }
             }
         }
+
+        private fun updateLabel(textView: TextView, calendar: Calendar) {
+            val myFormat = "dd-MM-yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.GERMANY)
+            textView.text = sdf.format(calendar.time)
+        }
     }
+
 
     class DeskDiffCallback : DiffUtil.ItemCallback<Desk>() {
         override fun areItemsTheSame(oldItem: Desk, newItem: Desk): Boolean {
