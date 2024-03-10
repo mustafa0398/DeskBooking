@@ -25,15 +25,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController, AppBarConfiguration(navGraph = navController.graph))
+        setupActionBarWithNavController(
+            navController,
+            AppBarConfiguration(navGraph = navController.graph)
+        )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            bottomNavigationView.visibility = if (destination.id in listOf(R.id.loginFragment, R.id.registerFragment)) View.GONE else View.VISIBLE
+            bottomNavigationView.visibility = if (destination.id in listOf(
+                    R.id.loginFragment,
+                    R.id.registerFragment
+                )
+            ) View.GONE else View.VISIBLE
+
+            val showBackArrow = destination.id == R.id.registerFragment || destination.id == R.id.desksFragment
+            supportActionBar?.setDisplayHomeAsUpEnabled(showBackArrow)
         }
 
         loginViewModel.checkLoginStatus()
@@ -44,7 +55,11 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.bookingplanFragment)
                 }
             } else {
-                if (navController.currentDestination?.id !in listOf(R.id.loginFragment, R.id.registerFragment)) {
+                if (navController.currentDestination?.id !in listOf(
+                        R.id.loginFragment,
+                        R.id.registerFragment
+                    )
+                ) {
                     navController.navigate(R.id.loginFragment)
                 }
             }
@@ -57,7 +72,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+    override fun onStart() {
+        super.onStart()
+        val currentDestination = navController.currentDestination?.id
+        val showBackArrow = currentDestination == R.id.registerFragment || currentDestination == R.id.desksFragment
+        supportActionBar?.setDisplayHomeAsUpEnabled(showBackArrow)
+    }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
