@@ -50,23 +50,24 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
         }
     }
 
-
     fun createBooking(deskId: String, startDate: String, endDate: String) {
         val createBooking = CreateBooking(dateStart = startDate, dateEnd = endDate, desk = deskId)
         viewModelScope.launch {
             try {
                 val result = RetrofitClient.apiService.createBooking(createBooking)
-                if (!result.isSuccessful) {
+                if (result.isSuccessful) {
+                    val successMessage = "Reservation was successful."
+                    statusMessage.value = Event(successMessage)
+                } else {
                     val errorBody = result.errorBody()?.string()
                     val errorMessage = parseErrorMessage(errorBody)
                     statusMessage.value = Event(errorMessage)
                 }
             } catch (e: Exception) {
-                statusMessage.value = Event(e.message ?: "Unknown error")
+                statusMessage.value = Event(e.message ?: "Unknown Error")
             }
         }
     }
-
 
     fun getEquipments() {
         viewModelScope.launch {

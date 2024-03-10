@@ -1,6 +1,5 @@
 package com.codingschool.deskbooking.data.model.authentication.offices
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

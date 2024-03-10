@@ -73,14 +73,10 @@ class AdminFragment : Fragment(), AdminActionListener {
             result.fold(
                 onSuccess = { desk ->
                     createDeskDialog?.dismiss()
-                    view?.let { v ->
-                        Snackbar.make(v, "Desk successfully created: ${desk.label}", Snackbar.LENGTH_LONG).show()
-                    }
+                    Toast.makeText(context, "Desk successfully created: ${desk.label}", Toast.LENGTH_LONG).show()
                 },
                 onFailure = { error ->
-                    view?.let { v ->
-                        Snackbar.make(v, "Error creating new desk: ${error.localizedMessage}", Snackbar.LENGTH_LONG).show()
-                    }
+                    Toast.makeText(context, "Error creating new desk: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             )
         }

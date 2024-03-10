@@ -95,16 +95,14 @@ class AdminViewModel(private val adminRepository: AdminRepository, private val f
                 response.fold(
                     onSuccess = { officeResponse ->
                         officeCreationResult.value = Result.success(officeResponse)
-                        updateResult.value = Result.success("Room successfully created.")
                     },
                     onFailure = { error ->
                         officeCreationResult.value = Result.failure(error)
-                        updateResult.value = Result.failure(Exception("Error creating room: ${error.message}"))
+
                     }
                 )
             } catch (e: Exception) {
                 officeCreationResult.value = Result.failure(e)
-                updateResult.value = Result.failure(Exception("Error: ${e.localizedMessage}"))
             } finally {
                 isLoading.value = false
             }
@@ -120,16 +118,13 @@ class AdminViewModel(private val adminRepository: AdminRepository, private val f
                 response.fold(
                     onSuccess = { deskResponse ->
                         deskCreationResult.value = Result.success(deskResponse)
-                        updateResult.value = Result.success("Desk successfully created.")
                     },
                     onFailure = { error ->
                         deskCreationResult.value = Result.failure(error)
-                        updateResult.value = Result.failure(Exception("Error creating desk: ${error.message}"))
                     }
                 )
             } catch (e: Exception) {
                 deskCreationResult.value = Result.failure(e)
-                updateResult.value = Result.failure(Exception("Error: ${e.localizedMessage}"))
             } finally {
                 isLoading.value = false
             }

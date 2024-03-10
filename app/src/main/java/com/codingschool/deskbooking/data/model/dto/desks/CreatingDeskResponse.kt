@@ -1,11 +1,9 @@
 package com.codingschool.deskbooking.data.model.dto.desks
 
-import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
-
 data class CreatingDeskResponse (
     val label: String,
     val office: String,
-    val equipment: List<Equipment>,
+    val equipment: List<String>,
     val row: Int,
     val column: Int,
     val type: String,
