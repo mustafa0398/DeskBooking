@@ -1,30 +1,35 @@
 package com.codingschool.deskbooking.ui.administration
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
+import com.codingschool.deskbooking.data.model.dto.desks.CreatingDesk
+import com.codingschool.deskbooking.data.model.dto.desks.CreatingDeskResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRequestUpdate
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
-import com.codingschool.deskbooking.data.model.dto.profile.ProfileResponse
-import com.codingschool.deskbooking.data.repository.AdminCommentRepository
+import com.codingschool.deskbooking.data.model.dto.offices.CreatingOffice
+import com.codingschool.deskbooking.data.model.dto.offices.CreatingOfficeResponse
+import com.codingschool.deskbooking.data.repository.AdminRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import kotlinx.coroutines.launch
 
 
-class AdminViewModel(private val commentRepository: AdminCommentRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
+
+class AdminViewModel(private val adminRepository: AdminRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
     val comments = MutableLiveData<Result<List<CommentResponse>>>()
     val fixDeskRequests = MutableLiveData<Result<List<FixDeskResponse>>>()
     val updateResult = MutableLiveData<Result<String>>()
     private val isLoading = MutableLiveData<Boolean>()
 
+    val officeCreationResult = MutableLiveData<Result<CreatingOfficeResponse>>()
+    val deskCreationResult = MutableLiveData<Result<CreatingDeskResponse>>()
 
     fun loadComments(page: Int) {
         isLoading.value = true
         viewModelScope.launch {
             try {
-                val result = commentRepository.getAllComments(page)
+                val result = adminRepository.getAllComments(page)
                 comments.value = Result.success(result.getOrThrow())
             } catch (e: Exception) {
                 comments.value = Result.failure(e)
@@ -63,9 +68,9 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
                         fixDeskRequests.value = Result.success(updatedList ?: listOf())
 
                         val message = if (status == "approved") {
-                            "Anfrage erfolgreich bestätigt."
+                            "Request successfully approved."
                         } else {
-                            "Anfrage erfolgreich abgelehnt."
+                            "Request successfully declined."
                         }
                         updateResult.value = Result.success(message)
 
@@ -76,6 +81,55 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
                         updateResult.value = Result.failure(e)
                     }
                 )
+            } finally {
+                isLoading.value = false
+            }
+        }
+    }
+
+    fun createOffice(office: CreatingOffice) {
+        viewModelScope.launch {
+            isLoading.value = true
+            try {
+                val response = adminRepository.createOffice(office)
+                response.fold(
+                    onSuccess = { officeResponse ->
+                        officeCreationResult.value = Result.success(officeResponse)
+                        updateResult.value = Result.success("Room successfully created.")
+                    },
+                    onFailure = { error ->
+                        officeCreationResult.value = Result.failure(error)
+                        updateResult.value = Result.failure(Exception("Error creating room: ${error.message}"))
+                    }
+                )
+            } catch (e: Exception) {
+                officeCreationResult.value = Result.failure(e)
+                updateResult.value = Result.failure(Exception("Error: ${e.localizedMessage}"))
+            } finally {
+                isLoading.value = false
+            }
+        }
+    }
+
+
+    fun createDesk(desk: CreatingDesk) {
+        viewModelScope.launch {
+            isLoading.value = true
+            try {
+                val response = adminRepository.createDesk(desk)
+                response.fold(
+                    onSuccess = { deskResponse ->
+                        deskCreationResult.value = Result.success(deskResponse)
+                        updateResult.value = Result.success("Desk successfully created.")
+                    },
+                    onFailure = { error ->
+                        deskCreationResult.value = Result.failure(error)
+                        updateResult.value = Result.failure(Exception("Error creating desk: ${error.message}"))
+                    }
+                )
+            } catch (e: Exception) {
+                deskCreationResult.value = Result.failure(e)
+                updateResult.value = Result.failure(Exception("Error: ${e.localizedMessage}"))
             } finally {
                 isLoading.value = false
             }

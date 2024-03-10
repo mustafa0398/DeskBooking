@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+        <EditText
+            android:id="@+id/etDeskLabel"
+            android:layout_width="match_parent"
+            android:layout_height= "48dp"
+            android:hint="@string/label_creating_desk"
+            android:inputType="text"
+            android:autofillHints="DeskLabel" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/equipment"
+            android:layout_marginTop="16dp"/>
+
+        <CheckBox
+            android:id="@+id/cbHDMI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hdmi" />
+
+        <CheckBox
+            android:id="@+id/cbUSBC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usb_c" />
+
+        <CheckBox
+            android:id="@+id/cbHeightAdjustable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/height_adjustable" />
+
+        <CheckBox
+            android:id="@+id/cbLaptopDock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/laptop_dock" />
+
+        <CheckBox
+            android:id="@+id/cbMonitor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/monitor" />
+
+        <CheckBox
+            android:id="@+id/cbMonitor2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/monitor_2" />
+
+</LinearLayout>

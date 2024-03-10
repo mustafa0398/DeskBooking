@@ -1,6 +1,8 @@
 package com.codingschool.deskbooking.ui.administration
 
+import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +15,12 @@ import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
 
 
-class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), private val listener: AdminActionListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), private val context: Context, private val listener: AdminActionListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_FIX_DESK_REQUEST = 0
         private const val TYPE_COMMENT = 1
         private const val TYPE_HEADER = 2
-        const val HEADER_FIX_DESK_REQUESTS = "FixDesk-Anfragen"
-        const val HEADER_COMMENTS = "Kommentare"
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -28,10 +28,16 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
             is FixDeskResponse -> TYPE_FIX_DESK_REQUEST
             is CommentResponse -> TYPE_COMMENT
             is String -> when(item) {
-                HEADER_FIX_DESK_REQUESTS, HEADER_COMMENTS -> TYPE_HEADER
-                else -> throw IllegalArgumentException("Unknown header type")
+                context.getString(R.string.header_fix_desk_requests), context.getString(R.string.header_comments) -> TYPE_HEADER
+                else -> {
+                    Log.e("AdminAdapter", "Unknown header type: $item")
+                    throw IllegalArgumentException("Unknown header type: $item")
+                }
             }
-            else -> throw IllegalArgumentException("Unknown item type")
+            else -> {
+                Log.e("AdminAdapter", "Unknown item type: $item")
+                throw IllegalArgumentException("Unknown item type: $item")
+            }
         }
     }
 

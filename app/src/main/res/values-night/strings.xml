@@ -1,26 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DeskBooking</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="department_array">
-        <item>CodingSchool</item>
-        <item>Diamir</item>
-        <item>WebundSoehne</item>
-        <item>DarwinsLab</item>
-        <item>DeepDive</item>
-        <item>TailoredApps</item>
-    </string-array>
-    <string name="error_passwords_do_not_match">Passwords do not match</string>
-    <string name="error_invalid_email">Enter a valid email address</string>
-    <string name="error_fill_all_fields">Please fill in all fields!</string>
-    <string name="login_failure">Invalid email or password</string>
-
-    <string name="columns">Columns: %1$d</string>
-    <string name="rows">Rows: %1$d</string>
-    <string name="id">ID: %s</string>
-    <string name="map">Map: %s</string>
-    <string name="logout">Logout</string>
     <string name="btnCreateRoomAndTable">Create office and desk</string>
-    <string name="tvAdminHeader">Administration section</string>
     <string name="room_name">Name of the office</string>
     <string name="room_columns">Columns</string>
     <string name="room_rows">Rows</string>
@@ -37,8 +17,6 @@
     <string name="equipment">Equipment:</string>
     <string name="hdmi">HDMI</string>
     <string name="usb_c">USB C</string>
-    <string name="height_adjustable">Height Adjustable</string>
-    <string name="laptop_dock">Laptop Dock</string>
     <string name="monitor">Monitor</string>
     <string name="monitor_2">Monitor 2</string>
 </resources>

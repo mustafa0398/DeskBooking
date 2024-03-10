@@ -17,5 +17,4 @@ class OfficesRepository {
             Result.failure(e)
         }
     }
-
 }
