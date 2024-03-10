@@ -23,7 +23,11 @@ class FavouriteFragment : Fragment(), FavouriteAdapter.FavReserveClickListener {
     private val favouriteViewModel: FavouriteViewModel by viewModel()
     private val desksViewModel: DesksViewModel by viewModel()
     private lateinit var favouriteAdapter: FavouriteAdapter
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_favourite, container, false)
 
         favouriteAdapter = FavouriteAdapter(this)

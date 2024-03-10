@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -35,7 +36,7 @@ class FavouriteAdapter(private val favReserveClickListener: FavReserveClickListe
         private val favDeskLabel: TextView = itemView.findViewById(R.id.tvFavDeskLabel)
         private val favDeskOfficeName: TextView = itemView.findViewById(R.id.tvFavOffice)
         private val btnFav: Button = itemView.findViewById(R.id.btnFavReserve)
-        private val btnDel: Button = itemView.findViewById(R.id.btnFavDelete)
+        private val btnDel: ImageButton = itemView.findViewById(R.id.btnFavDelete)
 
         init {
             btnFav.setOnClickListener {

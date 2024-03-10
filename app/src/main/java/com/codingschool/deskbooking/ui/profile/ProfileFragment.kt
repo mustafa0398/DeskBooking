@@ -87,10 +87,18 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch {
             val result = profileViewModel.updateUser(userId, userUpdate)
             if (result.isSuccess) {
-                Toast.makeText(context, "Benutzerdaten erfolgreich aktualisiert", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Benutzerdaten erfolgreich aktualisiert",
+                    Toast.LENGTH_SHORT
+                ).show()
                 profileViewModel.fetchUserProfile()
             } else {
-                Toast.makeText(context, "Fehler beim Aktualisieren der Benutzerdaten: ${result.exceptionOrNull()?.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context,
+                    "Fehler beim Aktualisieren der Benutzerdaten: ${result.exceptionOrNull()?.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

@@ -41,4 +41,5 @@
     <string name="laptop_dock">Laptop Dock</string>
     <string name="monitor">Monitor</string>
     <string name="monitor_2">Monitor 2</string>
+    <string name="show_equipments">Show Equipments</string>
 </resources>

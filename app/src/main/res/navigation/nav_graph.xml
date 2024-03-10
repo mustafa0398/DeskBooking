@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/bookingplanFragment"
         android:name="com.codingschool.deskbooking.ui.bookingplan.offices.OfficesFragment"
-        android:label="Booking Plan" >
+        android:label="Booking Plan - Office" >
         <action
             android:id="@+id/action_bookingplanFragment_to_desksFragment"
             app:destination="@id/desksFragment" />
@@ -58,6 +58,6 @@
     <fragment
         android:id="@+id/desksFragment"
         android:name="com.codingschool.deskbooking.ui.bookingplan.desks.DesksFragment"
-        android:label="fragment_desks"
+        android:label="Booking Plan - Desks"
         tools:layout="@layout/fragment_desks" />
 </navigation>

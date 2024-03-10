@@ -1,6 +1,5 @@
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,12 +11,19 @@ import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
 import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.data.repository.EquipmentRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
+import com.codingschool.deskbooking.Event
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel() {
 
     private val equipmentRepository = EquipmentRepository()
 
+    private val statusMessage = MutableLiveData<Event<String>>()
+
+    val message: LiveData<Event<String>>
+        get() = statusMessage
 
     val desksLiveData = MutableLiveData<List<Desk>>()
     val equipmentLiveData = MutableLiveData<List<Equipment>>()
@@ -50,16 +56,17 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
         viewModelScope.launch {
             try {
                 val result = RetrofitClient.apiService.createBooking(createBooking)
-                if (result.isSuccessful) {
-                    val bookingResponse = result.body()!!
-                } else {
-                    Log.e("ViewModel", "Error creating booking: ${result.code()}")
+                if (!result.isSuccessful) {
+                    val errorBody = result.errorBody()?.string()
+                    val errorMessage = parseErrorMessage(errorBody)
+                    statusMessage.value = Event(errorMessage)
                 }
             } catch (e: Exception) {
-                Log.e("ViewModel", "Failed to create booking: ${e.message}")
+                statusMessage.value = Event(e.message ?: "Unknown error")
             }
         }
     }
+
 
     fun getEquipments() {
         viewModelScope.launch {
@@ -67,12 +74,24 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
                 val response = equipmentRepository.getAllEquipments()
                 if (response.isSuccessful) {
                     _equipments.postValue(response.body())
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = parseErrorMessage(errorBody)
+                    statusMessage.value = Event(errorMessage)
                 } else {
-                    // Handle error response
+                    //.
                 }
             } catch (e: Exception) {
-                // Handle exception
+                //.
             }
+        }
+    }
+
+    private fun parseErrorMessage(errorBody: String?): String {
+        return try {
+            val jsonObject = JSONObject(errorBody)
+            jsonObject.getString("message")
+        } catch (e: JSONException) {
+            "Error parsing message"
         }
     }
 }

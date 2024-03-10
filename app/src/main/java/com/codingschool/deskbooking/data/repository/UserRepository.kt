@@ -8,11 +8,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import retrofit2.Response
 
 class UserRepository(private val apiService: ApiService) {
-    private val _userIdFlow : MutableStateFlow<String?> = MutableStateFlow(null)
-    val userIdFlow : StateFlow<String?> = _userIdFlow.asStateFlow()
+    private val _userIdFlow: MutableStateFlow<String?> = MutableStateFlow(null)
+    val userIdFlow: StateFlow<String?> = _userIdFlow.asStateFlow()
     suspend fun getUserProfile(): Response<User> {
-        return apiService.getUserProfile().also { if(it.isSuccessful){
-            _userIdFlow.value = it.body()?.id
-        } }
+        return apiService.getUserProfile().also {
+            if (it.isSuccessful) {
+                _userIdFlow.value = it.body()?.id
+            }
+        }
     }
 }

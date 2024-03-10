@@ -61,10 +61,15 @@ class OfficesFragment : Fragment() {
                             findNavController().navigate(menuItem.itemId)
                             true
                         } else {
-                            Snackbar.make(view, "Sie haben keine Zugriffsrechte für diese Seite.", Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(
+                                view,
+                                "Sie haben keine Zugriffsrechte für diese Seite.",
+                                Snackbar.LENGTH_LONG
+                            ).show()
                             false
                         }
                     }
+
                     else -> {
                         findNavController().navigate(menuItem.itemId)
                         true
