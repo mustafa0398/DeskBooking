@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
                     R.id.registerFragment
                 )
             ) View.GONE else View.VISIBLE
+
+            val showBackArrow = destination.id == R.id.registerFragment || destination.id == R.id.desksFragment
+            supportActionBar?.setDisplayHomeAsUpEnabled(showBackArrow)
         }
 
         loginViewModel.checkLoginStatus()
@@ -69,7 +72,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+    override fun onStart() {
+        super.onStart()
+        val currentDestination = navController.currentDestination?.id
+        val showBackArrow = currentDestination == R.id.registerFragment || currentDestination == R.id.desksFragment
+        supportActionBar?.setDisplayHomeAsUpEnabled(showBackArrow)
+    }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

@@ -3,13 +3,13 @@ package com.codingschool.deskbooking.ui.bookingplan.desks
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.desks.Desk
-import com.codingschool.deskbooking.data.model.dto.desks.FixDesk
 import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -52,7 +51,8 @@ class DesksAdapter(
         private val etDateStart: EditText = itemView.findViewById(R.id.etDeskStartDate)
         private val etDateEnd: EditText = itemView.findViewById(R.id.etDeskEndDate)
         private val btnEquipment: ImageButton = itemView.findViewById(R.id.btnEquipment)
-        private val tvFixFlex: TextView = itemView.findViewById(R.id.tvFixOrFlexDesk)
+        private val fixOrFlex: TextView = itemView.findViewById(R.id.tvFixOrFlexDesk)
+        private val ivAvailability: ImageView = itemView.findViewById(R.id.ivAvailability)
 
         private val startCalendar = Calendar.getInstance()
         private val endCalendar = Calendar.getInstance()
@@ -130,18 +130,26 @@ class DesksAdapter(
             }
         }
 
-
         fun bind(desk: Desk) {
             deskLabel.text = desk.label
             officeName.text = desk.office.name
-            Log.d("DesksAdapter", "FixDesk value: ${desk.fixDesk}")
-            tvFixFlex.text = if (desk.fixDesk != null) {
+
+            fixOrFlex.text = if (desk.fixdesk != null) {
                 "Fix"
             } else {
                 "Flex"
             }
-        }
 
+            val isAvailable = desk.nextBooking == null
+            if (isAvailable) {
+                ivAvailability.visibility = View.VISIBLE
+                ivAvailability.setImageResource(R.drawable.available_icon)
+            } else {
+                ivAvailability.visibility = View.VISIBLE
+                ivAvailability.setImageResource(R.drawable.unavailable_icon)
+            }
+            desk.id
+        }
 
         private fun updateLabel(textView: TextView, calendar: Calendar) {
             val myFormat = "dd.MM.yyyy"
