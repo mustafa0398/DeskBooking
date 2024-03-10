@@ -14,7 +14,7 @@ data class Desk(
     val label: String,
     val id: String,
     val nextBooking: String?,
-    val fixDesk: FixDesk?,
+    val fixdesk: FixDesk?,
     val type: String,
     val isUserFavourite: Boolean,
     val office: Office,
@@ -60,7 +60,7 @@ data class FixDeskRoom(
     val updatedBy: UserRoom
 )
 
-fun Desk.toDeskRoom() = DeskRoom(label = label, deskId = id, nextBooking, fixDesk, type, isUserFavourite, office, equipment, createdAt, updatedAt)
+fun Desk.toDeskRoom() = DeskRoom(label = label, deskId = id, nextBooking, fixdesk, type, isUserFavourite, office, equipment, createdAt, updatedAt)
 fun DeskRoom.toDesk() = Desk(label = label, id = deskId, nextBooking, fixDesk, type, isUserFavourite, office, equipment, createdAt, updatedAt)
 
 fun FixDesk.toFixDeskRoom() = FixDeskRoom(fixDeskId = id, user.toUserRoom(), createdAt, status, updatedAt, updatedBy.toUserRoom())

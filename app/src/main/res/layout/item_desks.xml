@@ -32,6 +32,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDeskLabel" />
 
+        <TextView
+            android:id="@+id/tvFixOrFlexDesk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fix/Flex Desk"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
+
         <ImageButton
             android:id="@+id/btnEquipment"
             android:layout_width="wrap_content"
@@ -43,6 +52,16 @@
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/show_equipments" />
 
+        <ImageView
+            android:id="@+id/ivAvailability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/available_icon"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnEquipment"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <EditText
             android:id="@+id/etDeskStartDate"
             android:layout_width="wrap_content"
@@ -52,7 +71,7 @@
             android:text="Start Date"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
+            app:layout_constraintTop_toBottomOf="@id/tvFixOrFlexDesk" />
 
         <EditText
             android:id="@+id/etDeskEndDate"
@@ -64,7 +83,7 @@
             android:text="End Date"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/tvDateTo"
-            app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
+            app:layout_constraintTop_toBottomOf="@id/tvFixOrFlexDesk" />
 
         <TextView
             android:id="@+id/tvDateTo"
@@ -72,12 +91,12 @@
             android:layout_height="wrap_content"
             android:text="—"
             android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/etDeskEndDate"
             app:layout_constraintStart_toEndOf="@+id/etDeskStartDate"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.478" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnDeskReserve"
@@ -86,6 +105,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
             android:text="Reserve"
+            app:cornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

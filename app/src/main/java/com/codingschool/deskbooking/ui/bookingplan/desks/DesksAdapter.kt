@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -39,8 +40,7 @@ class DesksAdapter(
 
     override fun onBindViewHolder(holder: DeskViewHolder, position: Int) {
         val desk = getItem(position)
-        val equipment = equipmentList.getOrNull(position)
-        holder.bind(desk, equipment)
+        holder.bind(desk)
     }
 
 
@@ -51,6 +51,8 @@ class DesksAdapter(
         private val etDateStart: EditText = itemView.findViewById(R.id.etDeskStartDate)
         private val etDateEnd: EditText = itemView.findViewById(R.id.etDeskEndDate)
         private val btnEquipment: ImageButton = itemView.findViewById(R.id.btnEquipment)
+        private val fixOrFlex: TextView = itemView.findViewById(R.id.tvFixOrFlexDesk)
+        private val ivAvailability: ImageView = itemView.findViewById(R.id.ivAvailability)
 
         private val startCalendar = Calendar.getInstance()
         private val endCalendar = Calendar.getInstance()
@@ -128,10 +130,24 @@ class DesksAdapter(
             }
         }
 
-
-        fun bind(desk: Desk, equipment: Equipment?) {
+        fun bind(desk: Desk) {
             deskLabel.text = desk.label
             officeName.text = desk.office.name
+
+            fixOrFlex.text = if (desk.fixdesk != null) {
+                "Fix"
+            } else {
+                "Flex"
+            }
+
+            val isAvailable = desk.nextBooking == null
+            if (isAvailable) {
+                ivAvailability.visibility = View.VISIBLE
+                ivAvailability.setImageResource(R.drawable.available_icon)
+            } else {
+                ivAvailability.visibility = View.VISIBLE
+                ivAvailability.setImageResource(R.drawable.unavailable_icon)
+            }
             desk.id
         }
 
@@ -166,7 +182,7 @@ class DesksAdapter(
         val equipmentNames = equipment.map { it }.toTypedArray()
 
         val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Equipment")
+        dialogBuilder.setTitle("Equipments")
         dialogBuilder.setItems(equipmentNames) { dialog, which ->
             val selectedEquipment = equipment[which]
             dialog.dismiss()
