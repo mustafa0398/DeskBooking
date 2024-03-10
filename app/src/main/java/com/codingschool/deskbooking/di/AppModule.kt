@@ -32,7 +32,7 @@ val appModule = module {
 }
 
 val registerModule = module {
-    viewModel { RegisterViewModel() }
+    viewModel { RegisterViewModel(get()) }
 }
 
 val officesModule = module {
