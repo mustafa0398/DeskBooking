@@ -24,10 +24,8 @@ class OfficesViewModel(private val officesRepository: OfficesRepository) : ViewM
                 if (response.isSuccessful) {
                     _office.postValue(response.body())
                 } else {
-                    Log.e("ViewModel", "Error fetching offices: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Log.e("ViewModel", "Failed to fetch offices: ${e.message}")
             }
         }
     }
@@ -39,7 +37,6 @@ class OfficesViewModel(private val officesRepository: OfficesRepository) : ViewM
                 userProfile.value = result.getOrThrow()
                 isAdmin.value = result.getOrThrow().isAdmin
             } catch (exception: Exception) {
-                Log.e("ProfileViewModel", "Fehler beim Abrufen des Profils", exception)
                 userProfile.value = null
                 isAdmin.value = null
             }

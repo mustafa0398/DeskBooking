@@ -30,12 +30,10 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
             is String -> when(item) {
                 context.getString(R.string.header_fix_desk_requests), context.getString(R.string.header_comments) -> TYPE_HEADER
                 else -> {
-                    Log.e("AdminAdapter", "Unknown header type: $item")
                     throw IllegalArgumentException("Unknown header type: $item")
                 }
             }
             else -> {
-                Log.e("AdminAdapter", "Unknown item type: $item")
                 throw IllegalArgumentException("Unknown item type: $item")
             }
         }

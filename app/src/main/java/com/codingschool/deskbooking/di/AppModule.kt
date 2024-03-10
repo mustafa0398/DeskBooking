@@ -28,7 +28,7 @@ val appModule = module {
     single<ApiService> { RetrofitClient.apiService }
     single { LoginRepository(get()) }
     single { UserRepository(get()) }
-    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get(), get()) }
 }
 
 val registerModule = module {
@@ -36,38 +36,38 @@ val registerModule = module {
 }
 
 val officesModule = module {
-    single { OfficesRepository() }
+    single { OfficesRepository(get()) }
     viewModel { OfficesViewModel(get()) }
 }
 
 val desksModule = module {
-    viewModel { DesksViewModel(desksRepository = get()) }
+    viewModel { DesksViewModel(desksRepository = get(), get()) }
 
 }
 
 val reservationModule = module {
     single { CommentRepository(get()) }
-    single { FavouriteRepository(get(), get()) }
+    single { FavouriteRepository(get(), get(), get()) }
     single { ReservationRepository(get()) }
     single { UserRepository(get()) }
     viewModel { ReservationViewModel(get(), get(), get(), get()) }
 }
 
 val adminModule = module {
-    single { AdminRepository(get()) }
-    single { FixDeskRequestRepository(get()) }
-    viewModel { AdminViewModel(get(), get()) }
+    single { AdminRepository(get(), get()) }
+    single { FixDeskRequestRepository(get(), get()) }
+    viewModel { AdminViewModel(get(), get(), get()) }
 }
 
 val profileModule = module {
-    single { ProfileRepository(get()) }
+    single { ProfileRepository(get(), get()) }
     single { LoginRepository(get())}
-    single { UserUpdateRepository(get()) }
+    single { UserUpdateRepository(get(), get()) }
     viewModel { ProfileViewModel(get(), get(), get()) }
 }
 
 val favouriteModule = module {
-    single { ProfileRepository(get()) }
-    single { FavouriteRepository(get(), get()) }
-    viewModel { FavouriteViewModel(get()) }
+    single { ProfileRepository(get(), get()) }
+    single { FavouriteRepository(get(), get(), get()) }
+    viewModel { FavouriteViewModel(get(), get()) }
 }

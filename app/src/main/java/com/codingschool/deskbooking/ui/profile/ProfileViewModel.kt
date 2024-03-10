@@ -1,6 +1,5 @@
 package com.codingschool.deskbooking.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,7 +27,6 @@ class ProfileViewModel(
                 userProfile.value = result.getOrThrow()
                 isAdmin.value = result.getOrThrow().isAdmin
             } catch (exception: Exception) {
-                Log.e("ProfileViewModel", "Fehler beim Abrufen des Profils", exception)
                 userProfile.value = null
                 isAdmin.value = null
             }

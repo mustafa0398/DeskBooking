@@ -182,12 +182,12 @@ class DesksAdapter(
         val equipmentNames = equipment.map { it }.toTypedArray()
 
         val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Equipments")
+        dialogBuilder.setTitle(context.getString(R.string.equipments))
         dialogBuilder.setItems(equipmentNames) { dialog, which ->
             val selectedEquipment = equipment[which]
             dialog.dismiss()
         }
-        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+        dialogBuilder.setNegativeButton(context.getString(R.string.cancel)) { dialog, _ ->
             dialog.dismiss()
         }
         val dialog = dialogBuilder.create()

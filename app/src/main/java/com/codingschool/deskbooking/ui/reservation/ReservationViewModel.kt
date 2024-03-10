@@ -1,6 +1,6 @@
 package com.codingschool.deskbooking.ui.reservation
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +13,7 @@ import com.codingschool.deskbooking.data.repository.FavouriteRepository
 import com.codingschool.deskbooking.data.repository.ReservationRepository
 import com.codingschool.deskbooking.data.repository.UserRepository
 import kotlinx.coroutines.launch
-import org.koin.java.KoinJavaComponent.inject
+
 
 
 class ReservationViewModel(
@@ -35,13 +35,10 @@ class ReservationViewModel(
                         if (response.isSuccessful) {
                             _userBookings.postValue(response.body())
                         } else {
-                            Log.e(
-                                "ReservationViewModel",
-                                "Failed to fetch user bookings: ${response.code()}"
-                            )
+                            //
                         }
                     } catch (e: Exception) {
-                        Log.e("ReservationViewModel", "Failed to fetch user bookings: ${e.message}")
+                        //
                     }
                 }
             }

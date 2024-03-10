@@ -1,5 +1,6 @@
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,11 +13,12 @@ import com.codingschool.deskbooking.data.repository.DesksRepository
 import com.codingschool.deskbooking.data.repository.EquipmentRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import com.codingschool.deskbooking.Event
+import com.codingschool.deskbooking.R
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 
-class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel() {
+class DesksViewModel(private val desksRepository: DesksRepository, private val context: Context) : ViewModel() {
 
     private val equipmentRepository = EquipmentRepository()
 
@@ -56,7 +58,7 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
             try {
                 val result = RetrofitClient.apiService.createBooking(createBooking)
                 if (result.isSuccessful) {
-                    val successMessage = "Reservation was successful."
+                    val successMessage = context.getString(R.string.reservation_was_successful)
                     statusMessage.value = Event(successMessage)
                 } else {
                     val errorBody = result.errorBody()?.string()
@@ -64,7 +66,7 @@ class DesksViewModel(private val desksRepository: DesksRepository) : ViewModel()
                     statusMessage.value = Event(errorMessage)
                 }
             } catch (e: Exception) {
-                statusMessage.value = Event(e.message ?: "Unknown Error")
+                statusMessage.value = Event(e.message ?: context.getString(R.string.unknown_error_create_booking))
             }
         }
     }

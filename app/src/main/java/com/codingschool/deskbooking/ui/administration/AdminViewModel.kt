@@ -1,8 +1,10 @@
 package com.codingschool.deskbooking.ui.administration
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.CreatingDesk
 import com.codingschool.deskbooking.data.model.dto.desks.CreatingDeskResponse
@@ -16,7 +18,7 @@ import kotlinx.coroutines.launch
 
 
 
-class AdminViewModel(private val adminRepository: AdminRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
+class AdminViewModel(private val adminRepository: AdminRepository, private val fixDeskRequestRepository: FixDeskRequestRepository, private val context: Context) : ViewModel() {
     val comments = MutableLiveData<Result<List<CommentResponse>>>()
     val fixDeskRequests = MutableLiveData<Result<List<FixDeskResponse>>>()
     val updateResult = MutableLiveData<Result<String>>()
@@ -68,9 +70,9 @@ class AdminViewModel(private val adminRepository: AdminRepository, private val f
                         fixDeskRequests.value = Result.success(updatedList ?: listOf())
 
                         val message = if (status == "approved") {
-                            "Request successfully approved."
+                            context.getString(R.string.request_successfully_approved)
                         } else {
-                            "Request successfully declined."
+                            context.getString(R.string.request_successfully_declined)
                         }
                         updateResult.value = Result.success(message)
 

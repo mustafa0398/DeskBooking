@@ -50,21 +50,23 @@ class AdminFragment : Fragment(), AdminActionListener {
                 adminViewModel.loadComments(0)
                 adminViewModel.loadFixDeskRequests()
             }, onFailure = { error ->
-                Toast.makeText(context, "Error: ${error.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.error, error.message), Toast.LENGTH_LONG).show()
             })
         }
 
         adminViewModel.officeCreationResult.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = { office ->
-                    Toast.makeText(requireContext(), "Office successfully created: ${office.name}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),
+                        getString(R.string.office_successfully_created, office.name), Toast.LENGTH_LONG).show()
                     val officeResponse = adminViewModel.officeCreationResult.value?.getOrNull()
                     if (officeResponse != null) {
                         showCreateDeskDialog(officeResponse.id)
                     }
                 },
                 onFailure = { error ->
-                    Toast.makeText(requireContext(), "Error creating new office: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),
+                        getString(R.string.error_creating_new_office, error.localizedMessage), Toast.LENGTH_LONG).show()
                 }
             )
         }
@@ -73,10 +75,12 @@ class AdminFragment : Fragment(), AdminActionListener {
             result.fold(
                 onSuccess = { desk ->
                     createDeskDialog?.dismiss()
-                    Toast.makeText(context, "Desk successfully created: ${desk.label}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        getString(R.string.desk_successfully_created, desk.label), Toast.LENGTH_LONG).show()
                 },
                 onFailure = { error ->
-                    Toast.makeText(context, "Error creating new desk: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,
+                        getString(R.string.error_creating_new_desk, error.localizedMessage), Toast.LENGTH_LONG).show()
                 }
             )
         }
@@ -100,7 +104,8 @@ class AdminFragment : Fragment(), AdminActionListener {
 
         adminViewModel.updateResult.observe(viewLifecycleOwner) { result ->
             result.onSuccess { message -> Toast.makeText(context, message, Toast.LENGTH_SHORT).show() }
-                .onFailure { error -> Toast.makeText(context, "Error: ${error.localizedMessage}", Toast.LENGTH_LONG).show() }
+                .onFailure { error -> Toast.makeText(context,
+                    getString(R.string.error_update_result, error.localizedMessage), Toast.LENGTH_LONG).show() }
         }
     }
 

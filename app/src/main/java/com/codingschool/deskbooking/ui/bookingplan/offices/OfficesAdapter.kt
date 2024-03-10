@@ -45,7 +45,6 @@ class OfficesAdapter(
     }
 
     fun updateData(newOffices: List<Office>) {
-        Log.d("Adapter", "Updating data with ${newOffices.size} offices")
         officeList = newOffices
         notifyDataSetChanged()
     }

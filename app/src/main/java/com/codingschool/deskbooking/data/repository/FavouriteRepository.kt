@@ -1,12 +1,15 @@
 package com.codingschool.deskbooking.data.repository
 
+import android.annotation.SuppressLint
+import android.content.Context
+import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteRequest
 import com.codingschool.deskbooking.data.model.authentication.favourites.CreateFavouriteResponse
 import com.codingschool.deskbooking.data.model.dto.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.service.api.ApiService
 import retrofit2.Response
 
-class FavouriteRepository(private val profileRepository: ProfileRepository, private val apiService: ApiService) {
+class FavouriteRepository(private val profileRepository: ProfileRepository, private val apiService: ApiService, private val context: Context) {
 
     suspend fun createFavourite(createFavouriteRequest: CreateFavouriteRequest): Response<CreateFavouriteResponse> {
         return apiService.createFavourite(createFavouriteRequest)
@@ -22,11 +25,15 @@ class FavouriteRepository(private val profileRepository: ProfileRepository, priv
                     if (response.isSuccessful && response.body() != null) {
                         Result.success(response.body()!!)
                     } else {
-                        Result.failure(Exception("Fehler beim Abrufen der Favoriten: ${response.message()}"))
+                        Result.failure(Exception(
+                            context.getString(
+                                R.string.error_retrieving_favorites,
+                                response.message()
+                            )))
                     }
                 },
                 onFailure = {
-                    Result.failure(Exception("Fehler beim Abrufen des Benutzerprofils"))
+                    Result.failure(Exception(context.getString(R.string.error_retrieving_user_profile)))
                 }
             )
         } catch (e: Exception) {
@@ -34,13 +41,18 @@ class FavouriteRepository(private val profileRepository: ProfileRepository, priv
         }
     }
 
+    @SuppressLint("StringFormatMatches")
     suspend fun deleteFavourite(id: String): Result<Unit> {
         return try {
             val response = apiService.deleteFavourite(id)
-            if (response.isSuccessful && response.code() == 204) { // Verwendung von code als Eigenschaft
+            if (response.isSuccessful && response.code() == 204) {
                 Result.success(Unit)
             } else {
-                Result.failure(Exception("Fehler beim Löschen des Favoriten: HTTP ${response.code()}"))
+                Result.failure(Exception(
+                    context.getString(
+                        R.string.error_deleting_favorite_http,
+                        response.code()
+                    )))
             }
         } catch (e: Exception) {
             Result.failure(e)

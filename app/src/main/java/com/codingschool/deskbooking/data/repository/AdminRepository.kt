@@ -1,5 +1,7 @@
 package com.codingschool.deskbooking.data.repository
 
+import android.content.Context
+import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.CreatingDesk
 import com.codingschool.deskbooking.data.model.dto.desks.CreatingDeskResponse
@@ -8,7 +10,7 @@ import com.codingschool.deskbooking.data.model.dto.offices.CreatingOfficeRespons
 import com.codingschool.deskbooking.service.api.ApiService
 
 
-class AdminRepository(private val apiService: ApiService) {
+class AdminRepository(private val apiService: ApiService, private val context: Context) {
 
     suspend fun getAllComments(page: Int): Result<List<CommentResponse>> {
         return try {
@@ -29,7 +31,11 @@ class AdminRepository(private val apiService: ApiService) {
             if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(RuntimeException("API call failed with response: ${response.message()}"))
+                Result.failure(RuntimeException(
+                    context.getString(
+                        R.string.api_call_failed_with_response,
+                        response.message()
+                    )))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -42,7 +48,11 @@ class AdminRepository(private val apiService: ApiService) {
             if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(RuntimeException("API call failed with response: ${response.message()}"))
+                Result.failure(RuntimeException(
+                    context.getString(
+                        R.string.api_call_failed_with_response_create_desk,
+                        response.message()
+                    )))
             }
         } catch (e: Exception) {
             Result.failure(e)

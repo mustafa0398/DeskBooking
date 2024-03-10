@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.local.dao.DeskDao
 import com.codingschool.deskbooking.data.model.authentication.offices.OfficeRoom
 import com.codingschool.deskbooking.data.model.dto.desks.DeskRoom
@@ -25,7 +26,7 @@ abstract class DeskBookingDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context,
                     DeskBookingDatabase::class.java,
-                    "DeskBookingDatabase"
+                    context.getString(R.string.deskbookingdatabase)
                 )
                     .build()
                 INSTANCE = instance

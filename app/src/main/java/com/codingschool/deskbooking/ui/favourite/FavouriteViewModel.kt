@@ -1,15 +1,17 @@
 package com.codingschool.deskbooking.ui.favourite
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.favourites.GetFavouriteResponse
 import com.codingschool.deskbooking.data.repository.FavouriteRepository
 import kotlinx.coroutines.launch
 
-class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) : ViewModel() {
+class FavouriteViewModel(private val favouriteRepository: FavouriteRepository, private val context: Context) : ViewModel() {
 
     private val _favourites = MutableLiveData<List<GetFavouriteResponse>>()
     val favourites: LiveData<List<GetFavouriteResponse>> = _favourites
@@ -21,17 +23,15 @@ class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) :
     val error: LiveData<String> = _error
 
     fun getUserFavourites() {
-        Log.d("FavouriteViewModel", "Starting API call to fetch favourites")
         viewModelScope.launch {
             val result = favouriteRepository.getUserFavorites()
             result.fold(
                 onSuccess = { favourites ->
-                    Log.d("FavouriteViewModel", "Favourites fetched successfully")
                     _favourites.value = favourites
                 },
                 onFailure = { exception ->
-                    Log.e("FavouriteViewModel", "Error fetching favourites: ${exception.message}", exception)
-                    _error.value = "Error fetching favourites: ${exception.message}"
+                    _error.value =
+                        context.getString(R.string.error_fetching_favourites, exception.message)
                 }
             )
         }
@@ -41,13 +41,12 @@ class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) :
         viewModelScope.launch {
             favouriteRepository.deleteFavourite(id).fold(
                 onSuccess = {
-                    Log.d("FavouriteViewModel", "Favourite successfully deleted")
                     _deleteResult.value = true
                     getUserFavourites()
                 },
                 onFailure = { exception ->
-                    Log.e("FavouriteViewModel", "Error deleting favourite: ${exception.message}", exception)
-                    _error.value = "Error deleting favourite: ${exception.message}"
+                    _error.value =
+                        context.getString(R.string.error_deleting_favourite, exception.message)
                 }
             )
         }

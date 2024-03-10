@@ -67,7 +67,7 @@ class RegisterFragment : Fragment() {
         registerViewModel.response.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = {
-                    showSnackbar(view, "Registration successful!")
+                    showSnackbar(view, getString(R.string.registration_successful))
                     findNavController().popBackStack()
                 },
                 onFailure = { e ->
@@ -75,16 +75,17 @@ class RegisterFragment : Fragment() {
                         e.message?.contains("400") == true -> {
                             showSnackbar(
                                 view,
-                                "Input data invalid. Please check your details and try again."
+                                getString(R.string.inputa_data_invalid)
                             )
                         }
 
                         e.message?.contains("409") == true -> {
-                            showSnackbar(view, "A user with this email already exists.")
+                            showSnackbar(view,
+                                getString(R.string.a_user_with_this_email_already_exists))
                         }
 
                         else -> {
-                            showSnackbar(view, e.message ?: "Unknown error occurred")
+                            showSnackbar(view, e.message ?: getString(R.string.unknown_error_occurred))
                         }
                     }
                 }

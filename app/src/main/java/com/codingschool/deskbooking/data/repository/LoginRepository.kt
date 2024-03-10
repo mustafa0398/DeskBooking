@@ -46,7 +46,6 @@ class LoginRepository(context: Context) {
                 }
             }
         } catch (e: Exception) {
-            Log.e("LoginRepository", "Fehler beim Löschen des Cache", e)
         }
     }
 

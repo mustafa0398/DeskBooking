@@ -89,14 +89,14 @@ class ProfileFragment : Fragment() {
             if (result.isSuccess) {
                 Toast.makeText(
                     context,
-                    "Benutzerdaten erfolgreich aktualisiert",
+                    getString(R.string.user_data_updated_successfully),
                     Toast.LENGTH_SHORT
                 ).show()
                 profileViewModel.fetchUserProfile()
             } else {
                 Toast.makeText(
                     context,
-                    "Fehler beim Aktualisieren der Benutzerdaten: ${result.exceptionOrNull()?.message}",
+                    getString(R.string.error_updating_user_data, result.exceptionOrNull()?.message),
                     Toast.LENGTH_LONG
                 ).show()
             }

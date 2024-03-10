@@ -36,7 +36,6 @@ class OfficesFragment : Fragment() {
         }
 
         officesViewModel.office.observe(viewLifecycleOwner) { offices ->
-            Log.d("LiveData", "New offices received: ${offices.size}")
             officesAdapter.updateData(offices)
         }
 
@@ -63,7 +62,7 @@ class OfficesFragment : Fragment() {
                         } else {
                             Snackbar.make(
                                 view,
-                                "Sie haben keine Zugriffsrechte für diese Seite.",
+                                getString(R.string.no_access),
                                 Snackbar.LENGTH_LONG
                             ).show()
                             false
