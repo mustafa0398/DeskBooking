@@ -13,7 +13,10 @@ import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
 
 
-class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), private val listener: AdminActionListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdminAdapter(
+    private var items: MutableList<Any> = mutableListOf(),
+    private val listener: AdminActionListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_FIX_DESK_REQUEST = 0
@@ -27,10 +30,11 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
         return when (val item = items[position]) {
             is FixDeskResponse -> TYPE_FIX_DESK_REQUEST
             is CommentResponse -> TYPE_COMMENT
-            is String -> when(item) {
+            is String -> when (item) {
                 HEADER_FIX_DESK_REQUESTS, HEADER_COMMENTS -> TYPE_HEADER
                 else -> throw IllegalArgumentException("Unknown header type")
             }
+
             else -> throw IllegalArgumentException("Unknown item type")
         }
     }
@@ -38,11 +42,20 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_FIX_DESK_REQUEST -> FixDeskRequestViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_admin_fix_desk_request, parent, false),
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_admin_fix_desk_request, parent, false),
                 listener
             )
-            TYPE_COMMENT -> CommentViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_admin_comment, parent, false))
-            TYPE_HEADER -> HeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false))
+
+            TYPE_COMMENT -> CommentViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_admin_comment, parent, false)
+            )
+
+            TYPE_HEADER -> HeaderViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false)
+            )
+
             else -> throw IllegalArgumentException("Unknown viewType")
         }
     }
@@ -60,9 +73,11 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
             itemView.findViewById<TextView>(R.id.headerTitle).text = headerTitle
         }
     }
+
     override fun getItemCount(): Int = items.size
 
-    class FixDeskRequestViewHolder(itemView: View, private val listener: AdminActionListener) : RecyclerView.ViewHolder(itemView) {
+    class FixDeskRequestViewHolder(itemView: View, private val listener: AdminActionListener) :
+        RecyclerView.ViewHolder(itemView) {
         fun bind(fixDeskRequest: FixDeskResponse) {
             val context = itemView.context
             val tvUser: TextView = itemView.findViewById(R.id.tvDeskRequestUser)
@@ -73,11 +88,23 @@ class AdminAdapter(private var items: MutableList<Any> = mutableListOf(), privat
 
             when (fixDeskRequest.status) {
                 "approved" -> {
-                    itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorApproved))
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorApproved
+                        )
+                    )
                 }
+
                 "rejected" -> {
-                    itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorRejected))
+                    itemView.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorRejected
+                        )
+                    )
                 }
+
                 else -> itemView.setBackgroundColor(Color.TRANSPARENT)
             }
 

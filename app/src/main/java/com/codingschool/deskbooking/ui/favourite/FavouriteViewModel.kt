@@ -43,7 +43,6 @@ class FavouriteViewModel(private val favouriteRepository: FavouriteRepository) :
                 onSuccess = {
                     Log.d("FavouriteViewModel", "Favourite successfully deleted")
                     _deleteResult.value = true
-                    // Rufen Sie hier getUserFavourites auf, um die Liste zu aktualisieren
                     getUserFavourites()
                 },
                 onFailure = { exception ->

@@ -16,39 +16,45 @@
             android:id="@+id/tvDeskRequestUser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="User Name"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="User Name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDeskRequestDesk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Desk Label"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestUser"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="Desk Label" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestUser" />
 
         <Button
             android:id="@+id/btnApproveFixDesk"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bestätigen"
-            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestDesk"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            android:text="Accept"
+            app:cornerRadius="4dp"
             app:layout_constraintEnd_toStartOf="@id/btnDeclineFixDesk"
-            app:layout_constraintHorizontal_chainStyle="packed"/>
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestDesk" />
 
         <Button
             android:id="@+id/btnDeclineFixDesk"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ablehnen"
-            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestDesk"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/black"
+            android:text="Deny"
+            app:cornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnApproveFixDesk"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestDesk" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

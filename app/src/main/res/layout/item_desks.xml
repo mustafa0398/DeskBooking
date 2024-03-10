@@ -17,7 +17,6 @@
             android:id="@+id/tvDeskLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:text="Desk Label"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -28,78 +27,68 @@
             android:id="@+id/tvOfficeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
             android:text="Office Name"
-            android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDeskLabel" />
 
-        <TextView
-            android:id="@+id/tvEquipmentName"
+        <ImageButton
+            android:id="@+id/btnEquipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/equipment_icon"
+            app:cornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/show_equipments" />
+
+        <EditText
+            android:id="@+id/etDeskStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Equipment Name"
-            android:textColor="@android:color/darker_gray"
+            android:focusable="false"
+            android:text="Start Date"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
 
+        <EditText
+            android:id="@+id/etDeskEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:focusable="false"
+            android:text="End Date"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvDateTo"
+            app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
+
+        <TextView
+            android:id="@+id/tvDateTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="—"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/etDeskEndDate"
+            app:layout_constraintStart_toEndOf="@+id/etDeskStartDate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.478" />
 
         <Button
             android:id="@+id/btnDeskReserve"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/black"
             android:text="Reserve"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOfficeName" />
-
-        <Button
-            android:id="@+id/btnStartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:text="btnStartDate"
-            app:layout_constraintEnd_toStartOf="@+id/btnEndDate"
-            app:layout_constraintTop_toBottomOf="@+id/btnDeskReserve" />
-
-        <Button
-            android:id="@+id/btnEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:text="btnEndDate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnDeskReserve" />
-
-        <TextView
-            android:id="@+id/tvDeskDateStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Date Start"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnStartDate" />
-
-        <TextView
-            android:id="@+id/tvDeskDateEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="Date End"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnEndDate" />
-
+            app:layout_constraintTop_toBottomOf="@+id/etDeskStartDate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

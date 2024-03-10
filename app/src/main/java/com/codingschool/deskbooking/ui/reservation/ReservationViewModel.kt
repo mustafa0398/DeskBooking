@@ -54,12 +54,12 @@ class ReservationViewModel(
                 val createCommentRequest = CreateCommentRequest(comment, deskId)
                 val response = commentRepository.createComment(createCommentRequest)
                 if (response.isSuccessful) {
-                    // Handle successful response
+                    //
                 } else {
-                    // Handle unsuccessful response
+                    //
                 }
             } catch (e: Exception) {
-                // Handle exception
+                //
             }
         }
     }
@@ -70,12 +70,12 @@ class ReservationViewModel(
                 val createFavouriteRequest = CreateFavouriteRequest(desk)
                 val response = favouriteRepository.createFavourite(createFavouriteRequest)
                 if (response.isSuccessful) {
-                    // Handle successful response
+                    //
                 } else {
-                    // Handle unsuccessful response
+                    //
                 }
             } catch (e: Exception) {
-                // Handle exception
+                //
             }
         }
     }

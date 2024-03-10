@@ -12,7 +12,11 @@ import com.codingschool.deskbooking.data.repository.UserUpdateRepository
 import com.codingschool.deskbooking.service.api.RetrofitClient
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val profileRepository: ProfileRepository, private val loginRepository: LoginRepository, private val userUpdateRepository: UserUpdateRepository) : ViewModel() {
+class ProfileViewModel(
+    private val profileRepository: ProfileRepository,
+    private val loginRepository: LoginRepository,
+    private val userUpdateRepository: UserUpdateRepository
+) : ViewModel() {
     val userProfile = MutableLiveData<ProfileResponse?>()
     val isAdmin = MutableLiveData<Boolean?>()
     val isLoggedOut = MutableLiveData<Boolean>()

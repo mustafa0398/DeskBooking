@@ -1,12 +1,15 @@
 package com.codingschool.deskbooking.ui.bookingplan.desks
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +26,6 @@ import java.util.Locale
 class DesksAdapter(
     private val bookingClickListener: BookingClickListener,
     private var equipmentList: List<Equipment> = emptyList()
-
 ) : ListAdapter<Desk, DesksAdapter.DeskViewHolder>(DeskDiffCallback()) {
 
     interface BookingClickListener {
@@ -46,11 +48,9 @@ class DesksAdapter(
         private val deskLabel: TextView = itemView.findViewById(R.id.tvDeskLabel)
         private val officeName: TextView = itemView.findViewById(R.id.tvOfficeName)
         private val btnReserve: Button = itemView.findViewById(R.id.btnDeskReserve)
-        private val equipmentName: TextView = itemView.findViewById(R.id.tvEquipmentName)
-        private val btnStartDate: Button = itemView.findViewById(R.id.btnStartDate)
-        private val btnEndDate: Button = itemView.findViewById(R.id.btnEndDate)
-        private val tvDateStart: TextView = itemView.findViewById(R.id.tvDeskDateStart)
-        private val tvDateEnd: TextView = itemView.findViewById(R.id.tvDeskDateEnd)
+        private val etDateStart: EditText = itemView.findViewById(R.id.etDeskStartDate)
+        private val etDateEnd: EditText = itemView.findViewById(R.id.etDeskEndDate)
+        private val btnEquipment: ImageButton = itemView.findViewById(R.id.btnEquipment)
 
         private val startCalendar = Calendar.getInstance()
         private val endCalendar = Calendar.getInstance()
@@ -60,7 +60,7 @@ class DesksAdapter(
                 startCalendar.set(Calendar.YEAR, year)
                 startCalendar.set(Calendar.MONTH, month)
                 startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateLabel(tvDateStart, startCalendar)
+                updateLabel(etDateStart, startCalendar)
             }
 
         private val endDatePicker =
@@ -68,16 +68,16 @@ class DesksAdapter(
                 endCalendar.set(Calendar.YEAR, year)
                 endCalendar.set(Calendar.MONTH, month)
                 endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateLabel(tvDateEnd, endCalendar)
+                updateLabel(etDateEnd, endCalendar)
             }
 
         init {
             btnReserve.setOnClickListener {
                 val desk = getItem(adapterPosition)
-                val selectedStartDate = tvDateStart.text.toString()
-                val selectedEndDate = tvDateEnd.text.toString()
+                val selectedStartDate = etDateStart.text.toString()
+                val selectedEndDate = etDateEnd.text.toString()
 
-                val dateFormatPattern = "dd-MM-yyyy"
+                val dateFormatPattern = "dd.MM.yyyy"
 
                 val formatter = SimpleDateFormat(dateFormatPattern, Locale.getDefault())
                 val isoFormatter =
@@ -96,14 +96,12 @@ class DesksAdapter(
                         desk = desk.id
                     )
                     bookingClickListener.onBookingClick(createBooking)
-                    Toast.makeText(itemView.context, "Reserve button clicked", Toast.LENGTH_SHORT)
-                        .show()
                 } catch (e: ParseException) {
                     e.printStackTrace()
                 }
             }
 
-            btnStartDate.setOnClickListener {
+            etDateStart.setOnClickListener {
                 DatePickerDialog(
                     itemView.context,
                     startDatePicker,
@@ -113,7 +111,7 @@ class DesksAdapter(
                 ).show()
             }
 
-            btnEndDate.setOnClickListener {
+            etDateEnd.setOnClickListener {
                 DatePickerDialog(
                     itemView.context,
                     endDatePicker,
@@ -122,6 +120,12 @@ class DesksAdapter(
                     endCalendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
+
+            btnEquipment.setOnClickListener {
+                val desk = getItem(adapterPosition)
+                val equipment = getEquipmentForDesk(desk.id)
+                showEquipmentDialog(itemView.context, desk.equipment)
+            }
         }
 
 
@@ -129,20 +133,10 @@ class DesksAdapter(
             deskLabel.text = desk.label
             officeName.text = desk.office.name
             desk.id
-            if (equipmentList.isNullOrEmpty()) {
-                equipmentName.text = "No Equipment"
-            } else {
-                val equipmentForDesk = equipmentList.find { it.id == desk.id }
-                if (equipmentForDesk != null) {
-                    equipmentName.text = equipmentForDesk.name
-                } else {
-                    equipmentName.text = "No Equipment"
-                }
-            }
         }
 
         private fun updateLabel(textView: TextView, calendar: Calendar) {
-            val myFormat = "dd-MM-yyyy"
+            val myFormat = "dd.MM.yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.GERMANY)
             textView.text = sdf.format(calendar.time)
         }
@@ -162,5 +156,25 @@ class DesksAdapter(
     fun updateEquipment(newEquipmentList: List<Equipment>) {
         equipmentList = newEquipmentList
         notifyDataSetChanged()
+    }
+
+    private fun getEquipmentForDesk(deskId: String): List<Equipment> {
+        return equipmentList.filter { it.id == deskId }
+    }
+
+    private fun showEquipmentDialog(context: Context, equipment: List<String>) {
+        val equipmentNames = equipment.map { it }.toTypedArray()
+
+        val dialogBuilder = AlertDialog.Builder(context)
+        dialogBuilder.setTitle("Equipment")
+        dialogBuilder.setItems(equipmentNames) { dialog, which ->
+            val selectedEquipment = equipment[which]
+            dialog.dismiss()
+        }
+        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = dialogBuilder.create()
+        dialog.show()
     }
 }

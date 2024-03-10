@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import org.koin.android.ext.android.inject
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.format.DateTimeFormatter
+import com.google.android.material.snackbar.Snackbar
 
 class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
@@ -25,6 +24,7 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
 
         desksViewModel.loadAllDesk()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,6 +53,7 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
         })
         desksViewModel.getDesksByOfficeId(id)
         desksViewModel.getEquipments()
+        myMessage()
         return root
     }
 
@@ -67,4 +68,13 @@ class DesksFragment : Fragment(), DesksAdapter.BookingClickListener {
         )
     }
 
+    fun myMessage() {
+        desksViewModel.message.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it.getContentIfNotHandled()?.let {
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
+
+

@@ -18,6 +18,4 @@ class ProfileRepository(private val apiService: ApiService) {
             Result.failure(e)
         }
     }
-
-
 }
