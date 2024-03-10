@@ -19,7 +19,11 @@ class AdminFragment : Fragment(), AdminActionListener {
     private lateinit var recyclerView: RecyclerView
     private val profileViewModel: ProfileViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_admin, container, false)
     }
 
@@ -62,8 +66,16 @@ class AdminFragment : Fragment(), AdminActionListener {
         }
 
         adminViewModel.updateResult.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { message -> Toast.makeText(context, message, Toast.LENGTH_SHORT).show() }
-                .onFailure { error -> Toast.makeText(context, "Fehler: ${error.localizedMessage}", Toast.LENGTH_LONG).show() }
+            result.onSuccess { message ->
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+                .onFailure { error ->
+                    Toast.makeText(
+                        context,
+                        "Fehler: ${error.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
         }
     }
 

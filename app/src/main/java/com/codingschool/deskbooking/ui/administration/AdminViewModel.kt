@@ -1,19 +1,19 @@
 package com.codingschool.deskbooking.ui.administration
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codingschool.deskbooking.data.model.dto.comments.CommentResponse
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskRequestUpdate
 import com.codingschool.deskbooking.data.model.dto.desks.FixDeskResponse
-import com.codingschool.deskbooking.data.model.dto.profile.ProfileResponse
 import com.codingschool.deskbooking.data.repository.AdminCommentRepository
 import com.codingschool.deskbooking.data.repository.FixDeskRequestRepository
 import kotlinx.coroutines.launch
 
-
-class AdminViewModel(private val commentRepository: AdminCommentRepository, private val fixDeskRequestRepository: FixDeskRequestRepository) : ViewModel() {
+class AdminViewModel(
+    private val commentRepository: AdminCommentRepository,
+    private val fixDeskRequestRepository: FixDeskRequestRepository
+) : ViewModel() {
     val comments = MutableLiveData<Result<List<CommentResponse>>>()
     val fixDeskRequests = MutableLiveData<Result<List<FixDeskResponse>>>()
     val updateResult = MutableLiveData<Result<String>>()
@@ -68,7 +68,6 @@ class AdminViewModel(private val commentRepository: AdminCommentRepository, priv
                             "Anfrage erfolgreich abgelehnt."
                         }
                         updateResult.value = Result.success(message)
-
 
 
                     },

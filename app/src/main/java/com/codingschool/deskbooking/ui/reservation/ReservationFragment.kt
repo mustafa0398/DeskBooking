@@ -14,12 +14,17 @@ import com.codingschool.deskbooking.data.model.authentication.favourites.CreateF
 import com.codingschool.deskbooking.data.model.dto.bookings.BookingResponse
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener, ReservationAdapter.FavoriteClickListener {
+class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener,
+    ReservationAdapter.FavoriteClickListener {
 
     private val reservationViewModel: ReservationViewModel by viewModel()
     private lateinit var reservationAdapter: ReservationAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_reservation, container, false)
 
         val recyclerView: RecyclerView = root.findViewById(R.id.rvReservation)
@@ -35,9 +40,11 @@ class ReservationFragment : Fragment(), ReservationAdapter.CommentClickListener,
 
         return root
     }
+
     override fun onCommentSendClicked(booking: BookingResponse, comment: String) {
         reservationViewModel.createComment(comment, booking.desk.id)
     }
+
     override fun onFavoriteClicked(favourite: CreateFavouriteResponse) {
         reservationViewModel.createFavourite(favourite.desk)
     }
