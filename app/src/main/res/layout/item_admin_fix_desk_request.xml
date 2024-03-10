@@ -16,7 +16,7 @@
             android:id="@+id/tvDeskRequestUser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="User Name"
+            android:text="@string/user_name"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
             android:id="@+id/tvDeskRequestDesk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Desk Label"
+            android:text="@string/desk_label_admin"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDeskRequestUser" />
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/black"
-            android:text="Accept"
+            android:text="@string/accept"
             app:cornerRadius="4dp"
             app:layout_constraintEnd_toStartOf="@id/btnDeclineFixDesk"
             app:layout_constraintHorizontal_chainStyle="packed"

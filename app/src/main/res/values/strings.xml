@@ -35,14 +35,14 @@
     <string name="create_new_desk">Create new Desk</string>
     <string name="label_creating_desk">Name of the desk</string>
     <string name="equipment">Equipment:</string>
-    <string name="hdmi">HDMI</string>
-    <string name="usb_c">USB C</string>
-    <string name="height_adjustable">Height Adjustable</string>
-    <string name="laptop_dock">Laptop Dock</string>
-    <string name="monitor">Monitor</string>
-    <string name="monitor_2">Monitor 2</string>
+    <string name="hdmi" translatable="false">HDMI</string>
+    <string name="usb_c" translatable="false">USB C</string>
+    <string name="height_adjustable" translatable="false">Height Adjustable</string>
+    <string name="laptop_dock" translatable="false">Laptop Dock</string>
+    <string name="monitor" translatable="false">Monitor</string>
+    <string name="monitor_2" translatable="false">Monitor 2</string>
     <string name="show_equipments">Show Equipments</string>
-    <string name="deskbookingdatabase">DeskBookingDatabase</string>
+    <string name="deskbookingdatabase" translatable="false">DeskBookingDatabase</string>
     <string name="error_retrieving_favorites">Error retrieving favorites: %1$s</string>
     <string name="error_retrieving_user_profile">Error retrieving user profile.</string>
     <string name="api_call_failed_with_response">API call failed with response: %1$s</string>
@@ -75,4 +75,54 @@
     <string name="inputa_data_invalid">Input data invalid. Please check your details and try again.</string>
     <string name="a_user_with_this_email_already_exists">A user with this email already exists.</string>
     <string name="unknown_error_occurred">Unknown error occurred</string>
+    <string name="write_a_comment">Write a Comment</string>
+    <string name="date_end">Date End</string>
+    <string name="date_start">Date Start</string>
+    <string name="office_name">Office Name</string>
+    <string name="desk_label">Desk Label</string>
+    <string name="desk_label_favourites">Desk Label</string>
+    <string name="office_name_favourites">Office Name</string>
+    <string name="quick_reserve">Quick Reserve</string>
+    <string name="fix_flex_desk">Fix/Flex Desk</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="reserve">Reserve</string>
+    <string name="office_name_desks">Office Name</string>
+    <string name="desk_label_desks">Desk Label</string>
+    <string name="office_name_offices">Office Name</string>
+    <string name="accept">Accept</string>
+    <string name="desk_label_admin">Desk Label</string>
+    <string name="user_name">User Name</string>
+    <string name="kommentar">Kommentar</string>
+    <string name="user">User</string>
+    <string name="we_are_excited_to_see_you_here">We are excited to see you here!</string>
+    <string name="almost_there">Almost There !</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up_nav">Sign Up</string>
+    <string name="email_profile">Email</string>
+    <string name="password_profile">Password</string>
+    <string name="last_name_profile">Last Name</string>
+    <string name="first_name_profile">First Name</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="choose_an_office">Choose an office</string>
+    <string name="desk_booking_system">Desk Booking System</string>
+    <string name="welcome_back">Welcome Back !</string>
+    <string name="sign_in_to_continue">Sign In to Continue</string>
+    <string name="email_address">Email Address</string>
+    <string name="password_login">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="don_t_have_an_account_yet_sign_up">Don\'t have an Account yet? SIGN UP!</string>
+    <string name="input_data_invalid">input data invalid</string>
+    <string name="favourite_desks">Favourite Desks</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="administration">Administration</string>
+    <string name="your_reservations">Your Reservations</string>
+    <string name="booking_plan_desks">Booking Plan - Desks</string>
+    <string name="booking_plan_offices">Booking Plan - Offices</string>
+    <string name="login_nav">Login</string>
 </resources>

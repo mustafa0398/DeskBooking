@@ -18,7 +18,7 @@
             android:id="@+id/tvFavDeskLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Desk Label"
+            android:text="@string/desk_label_favourites"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
             android:id="@+id/tvFavOffice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Office Name"
+            android:text="@string/office_name_favourites"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvFavDeskLabel" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:backgroundTint="@color/black"
-            android:text="Quick Reserve"
+            android:text="@string/quick_reserve"
             app:cornerRadius="4dp"
             app:layout_constraintEnd_toStartOf="@+id/btnFavDelete"
             app:layout_constraintTop_toTopOf="parent" />

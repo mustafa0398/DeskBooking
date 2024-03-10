@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.codingschool.deskbooking.ui.login.LoginFragment"
-        android:label="Login" >
+        android:label="@string/login_nav" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -19,11 +19,11 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.codingschool.deskbooking.ui.register.RegisterFragment"
-        android:label="Sign Up" />
+        android:label="@string/sign_up_nav" />
     <fragment
         android:id="@+id/bookingplanFragment"
         android:name="com.codingschool.deskbooking.ui.bookingplan.offices.OfficesFragment"
-        android:label="Booking Plan - Offices" >
+        android:label="@string/booking_plan_offices" >
         <action
             android:id="@+id/action_bookingplanFragment_to_desksFragment"
             app:destination="@id/desksFragment" />
@@ -34,12 +34,12 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.codingschool.deskbooking.ui.favourite.FavouriteFragment"
-        android:label="Favourite Desks"
+        android:label="@string/favourite_desks"
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.codingschool.deskbooking.ui.profile.ProfileFragment"
-        android:label="Profile Settings"
+        android:label="@string/profile_settings"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
@@ -48,16 +48,16 @@
     <fragment
         android:id="@+id/administrationFragment"
         android:name="com.codingschool.deskbooking.ui.administration.AdminFragment"
-        android:label="Administration"
+        android:label="@string/administration"
         tools:layout="@layout/fragment_admin" />
     <fragment
         android:id="@+id/reservationFragment"
         android:name="com.codingschool.deskbooking.ui.reservation.ReservationFragment"
-        android:label="Your Reservations"
+        android:label="@string/your_reservations"
         tools:layout="@layout/fragment_reservation" />
     <fragment
         android:id="@+id/desksFragment"
         android:name="com.codingschool.deskbooking.ui.bookingplan.desks.DesksFragment"
-        android:label="Booking Plan - Desks"
+        android:label="@string/booking_plan_desks"
         tools:layout="@layout/fragment_desks" />
 </navigation>

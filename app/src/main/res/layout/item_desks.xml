@@ -17,7 +17,7 @@
             android:id="@+id/tvDeskLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Desk Label"
+            android:text="@string/desk_label_desks"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             android:id="@+id/tvOfficeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Office Name"
+            android:text="@string/office_name_desks"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvDeskLabel" />
@@ -36,7 +36,7 @@
             android:id="@+id/tvFixOrFlexDesk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fix/Flex Desk"
+            android:text="@string/fix_flex_desk"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvOfficeName" />
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:focusable="false"
-            android:text="Start Date"
+            android:text="@string/start_date"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFixOrFlexDesk" />
@@ -80,7 +80,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginStart="10dp"
             android:focusable="false"
-            android:text="End Date"
+            android:text="@string/end_date"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/tvDateTo"
             app:layout_constraintTop_toBottomOf="@id/tvFixOrFlexDesk" />
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
-            android:text="Reserve"
+            android:text="@string/reserve"
             app:cornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -8,7 +8,7 @@
         android:id="@+id/tvChooseOffice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose an office"
+        android:text="@string/choose_an_office"
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginTop="10dp"

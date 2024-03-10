@@ -19,7 +19,7 @@
             android:id="@+id/tvOfficeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Office Name"
+            android:text="@string/office_name_offices"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
