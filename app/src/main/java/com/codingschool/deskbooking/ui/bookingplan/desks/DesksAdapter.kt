@@ -3,6 +3,7 @@ package com.codingschool.deskbooking.ui.bookingplan.desks
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codingschool.deskbooking.R
 import com.codingschool.deskbooking.data.model.dto.bookings.CreateBooking
 import com.codingschool.deskbooking.data.model.dto.desks.Desk
+import com.codingschool.deskbooking.data.model.dto.desks.FixDesk
 import com.codingschool.deskbooking.data.model.dto.equipment.Equipment
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -39,8 +41,7 @@ class DesksAdapter(
 
     override fun onBindViewHolder(holder: DeskViewHolder, position: Int) {
         val desk = getItem(position)
-        val equipment = equipmentList.getOrNull(position)
-        holder.bind(desk, equipment)
+        holder.bind(desk)
     }
 
 
@@ -51,6 +52,7 @@ class DesksAdapter(
         private val etDateStart: EditText = itemView.findViewById(R.id.etDeskStartDate)
         private val etDateEnd: EditText = itemView.findViewById(R.id.etDeskEndDate)
         private val btnEquipment: ImageButton = itemView.findViewById(R.id.btnEquipment)
+        private val tvFixFlex: TextView = itemView.findViewById(R.id.tvFixOrFlexDesk)
 
         private val startCalendar = Calendar.getInstance()
         private val endCalendar = Calendar.getInstance()
@@ -129,11 +131,17 @@ class DesksAdapter(
         }
 
 
-        fun bind(desk: Desk, equipment: Equipment?) {
+        fun bind(desk: Desk) {
             deskLabel.text = desk.label
             officeName.text = desk.office.name
-            desk.id
+            Log.d("DesksAdapter", "FixDesk value: ${desk.fixDesk}")
+            tvFixFlex.text = if (desk.fixDesk != null) {
+                "Fix"
+            } else {
+                "Flex"
+            }
         }
+
 
         private fun updateLabel(textView: TextView, calendar: Calendar) {
             val myFormat = "dd.MM.yyyy"
@@ -166,7 +174,7 @@ class DesksAdapter(
         val equipmentNames = equipment.map { it }.toTypedArray()
 
         val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Equipment")
+        dialogBuilder.setTitle("Equipments")
         dialogBuilder.setItems(equipmentNames) { dialog, which ->
             val selectedEquipment = equipment[which]
             dialog.dismiss()

@@ -25,15 +25,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNavigationView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController, AppBarConfiguration(navGraph = navController.graph))
+        setupActionBarWithNavController(
+            navController,
+            AppBarConfiguration(navGraph = navController.graph)
+        )
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            bottomNavigationView.visibility = if (destination.id in listOf(R.id.loginFragment, R.id.registerFragment)) View.GONE else View.VISIBLE
+            bottomNavigationView.visibility = if (destination.id in listOf(
+                    R.id.loginFragment,
+                    R.id.registerFragment
+                )
+            ) View.GONE else View.VISIBLE
         }
 
         loginViewModel.checkLoginStatus()
@@ -44,7 +52,11 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.bookingplanFragment)
                 }
             } else {
-                if (navController.currentDestination?.id !in listOf(R.id.loginFragment, R.id.registerFragment)) {
+                if (navController.currentDestination?.id !in listOf(
+                        R.id.loginFragment,
+                        R.id.registerFragment
+                    )
+                ) {
                     navController.navigate(R.id.loginFragment)
                 }
             }
