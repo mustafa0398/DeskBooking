@@ -4,7 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorApproved">#4CAF50</color>
     <color name="colorRejected">#F44336</color>
-    <color name="primary">#00BCD4</color>
-    <color name="primaryVariant">#2800BCD4</color>
-    <color name="secondary">#7000AAD4</color>
+    <color name="primary">#FEB333</color>
+    <color name="primaryVariant">#000000</color>
+    <color name="secondary">#000000</color>
+    <color name="green">#F8F5F2</color>
+    <color name="yellow">#FEB333</color>
 </resources>

@@ -22,7 +22,17 @@ class MyApplication : Application() {
         AndroidThreeTen.init(this)
         startKoin {
             androidContext(this@MyApplication)
-            modules(dataModule, appModule, registerModule, officesModule, desksModule, reservationModule, favouriteModule, adminModule, profileModule)
+            modules(
+                dataModule,
+                appModule,
+                registerModule,
+                officesModule,
+                desksModule,
+                reservationModule,
+                favouriteModule,
+                adminModule,
+                profileModule
+            )
 
         }
     }
